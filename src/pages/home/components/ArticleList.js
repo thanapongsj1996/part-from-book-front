@@ -41,7 +41,7 @@ export default function AricleList() {
   return (
     <>
       <Typography className={classes.title} variant="h4" component="h1">
-        All Articles
+        บทความทั้งหมด
       </Typography>
 
       <CategoryList />
@@ -51,7 +51,7 @@ export default function AricleList() {
           <CircularProgress color="secondary" />
         </div>
       ) : (
-        <Grid container justify="center" spacing={2}>
+        <Grid container justify="center" spacing={3}>
           {articles.map((article) => (
             <ArticleItem key={article._id} {...article} />
           ))}

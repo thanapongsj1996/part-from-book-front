@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   Link,
-  Container,
   Switch,
   FormControlLabel,
   IconButton,
@@ -16,6 +15,7 @@ import logo from 'assets/images/small-logo.png'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
   },
   logoLink: {
     marginRight: theme.spacing(2),
@@ -34,29 +34,33 @@ export default function Header() {
 
   return (
     <AppBar className={classes.appBar} position="fixed">
-      <Container>
-        <Toolbar>
-          <Link
-            className={classes.logoLink}
-            href="/"
-            color="inherit"
-            underline="none"
-          >
-            <img className={classes.logoImage} src={logo} alt="small-logo" />
-          </Link>
+      <Toolbar>
+        <Link
+          className={classes.logoLink}
+          href="/"
+          color="inherit"
+          underline="none"
+        >
+          <img className={classes.logoImage} src={logo} alt="small-logo" />
+        </Link>
 
-          <div className={classes.spacer}></div>
+        <div className={classes.spacer}></div>
 
-          {/* <FormControlLabel
-            control={<Switch color="secondary" />}
-            label="Dark"
-          /> */}
+        {/* <Switch
+          color="primary"
+          inputProps={{ 'aria-label': 'primary checkbox' }}
+        /> */}
+        {/* <span style={{ color: 'black' }}>Dark</span> */}
+        {/* <FormControlLabel control={<Switch color="primary" />} label="Dark" />
+        <FormControlLabel
+          control={<Switch color="primary" />}
+          label="Primary"
+        /> */}
 
-          <IconButton color="inherit">
-            <AccountCircleSharp fontSize="large" />
-          </IconButton>
-        </Toolbar>
-      </Container>
+        <IconButton>
+          <AccountCircleSharp fontSize="large" />
+        </IconButton>
+      </Toolbar>
     </AppBar>
   )
 }

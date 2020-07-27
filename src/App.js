@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { CssBaseline, useMediaQuery } from '@material-ui/core'
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -17,14 +18,16 @@ export default function App() {
         main: 'rgba(49, 28, 135, 0.95)',
       },
       secondary: {
-        main: '#A6ACAF',
+        main: '#BDC3C7',
       },
     },
   })
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <HomeLayout />
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <HomeLayout />
+      </ThemeProvider>
+    </Router>
   )
 }

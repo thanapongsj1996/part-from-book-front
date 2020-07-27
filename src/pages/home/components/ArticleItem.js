@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   Grid,
   Card,
@@ -6,7 +7,9 @@ import {
   Avatar,
   CardMedia,
   CardContent,
+  CardActions,
   Typography,
+  Button,
 } from '@material-ui/core'
 import moment from 'moment'
 
@@ -14,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    height: 300,
+    height: 280,
   },
   card: {
     boxShadow: '0px 0px 15px -3px rgba(0,0,0,0.75)',
@@ -28,12 +31,12 @@ export default function ProductItem(props) {
   const classes = useStyles()
 
   return (
-    <Grid item xs={12} sm={9} md={7}>
+    <Grid item xs={12} sm={9} md={5}>
       <Card className={classes.card}>
         <CardHeader
           avatar={<Avatar src={writerPhoto} />}
           title={`${fname} ${lname}`}
-          subheader={moment(updatedAt).format('MMMM D YYYY, h:mm:ss A')}
+          subheader={moment(updatedAt).format('MMMM D, YYYY')}
         />
 
         <CardMedia
@@ -48,9 +51,26 @@ export default function ProductItem(props) {
           </Typography>
 
           <Typography variant="body" color="textSecondary" component="p">
-            {`${body.slice(0, 30)}${body.length > 30 ? '...' : ''}`}
+            {`${body.slice(0, 120)}${body.length > 120 ? '...' : ''}`}
           </Typography>
         </CardContent>
+
+        <CardActions disableSpacing>
+          <Grid container justify="flex-end">
+            <Grid item xs={12} sm={4}>
+              <Button
+                component={Link}
+                to="/article"
+                fullWidth="true"
+                variant="contained"
+                color="primary"
+                href="#contained-buttons"
+              >
+                อ่านเพิ่มเติม
+              </Button>
+            </Grid>
+          </Grid>
+        </CardActions>
       </Card>
     </Grid>
   )
