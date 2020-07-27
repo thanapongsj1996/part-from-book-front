@@ -30,4 +30,4 @@ timeout: 1200s
 images:
   - gcr.io/$PROJECT_ID/part-from-book-front
 # gcloud builds submit --project "part-from-book" --config=./cloudbuild.yaml
-# gcloud beta run deploy part-from-book-front --project "part-from-book" --image gcr.io/part-from-book/part-from-book-front --platform managed
+# gcloud beta run deploy part-from-book-front --region asia-northeast1 --project "part-from-book" --image gcr.io/part-from-book/part-from-book-front --platform managed
