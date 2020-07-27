@@ -12,9 +12,9 @@ export default function App() {
 
   const theme = createMuiTheme({
     palette: {
-      type: prefersDarkMode ? 'dark' : 'light',
+      type: prefersDarkMode ? 'light' : 'light',
       primary: {
-        main: '#273746',
+        main: 'rgba(49, 28, 135, 0.95)',
       },
       secondary: {
         main: '#A6ACAF',

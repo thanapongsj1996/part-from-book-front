@@ -7,10 +7,9 @@ import {
   Switch,
   FormControlLabel,
   IconButton,
-  Badge,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { ShoppingCart } from '@material-ui/icons'
+import { AccountCircleSharp } from '@material-ui/icons'
 
 import logo from 'assets/images/small-logo.png'
 
@@ -45,15 +44,16 @@ export default function Header() {
           >
             <img className={classes.logoImage} src={logo} alt="small-logo" />
           </Link>
+
           <div className={classes.spacer}></div>
-          <FormControlLabel
+
+          {/* <FormControlLabel
             control={<Switch color="secondary" />}
             label="Dark"
-          ></FormControlLabel>
+          /> */}
+
           <IconButton color="inherit">
-            <Badge badgeContent={5} color="secondary">
-              <ShoppingCart></ShoppingCart>
-            </Badge>
+            <AccountCircleSharp fontSize="large" />
           </IconButton>
         </Toolbar>
       </Container>
