@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -8,21 +9,23 @@ import {
   IconButton,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { AccountCircleSharp } from '@material-ui/icons'
+import { AccountCircleSharp, Settings } from '@material-ui/icons'
 
 import logo from 'assets/images/small-logo.png'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    opacity: 0.97,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: '0px 0px 4px -1px rgba(0,0,0,0.75)',
   },
   logoLink: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   logoImage: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
   },
   spacer: {
     flexGrow: 1,
@@ -36,10 +39,11 @@ export default function Header() {
     <AppBar className={classes.appBar} position="fixed">
       <Toolbar>
         <Link
-          className={classes.logoLink}
-          href="/"
+          component={RouterLink}
+          to="/"
           color="inherit"
           underline="none"
+          className={classes.logoLink}
         >
           <img className={classes.logoImage} src={logo} alt="small-logo" />
         </Link>
@@ -49,17 +53,18 @@ export default function Header() {
         {/* <Switch
           color="primary"
           inputProps={{ 'aria-label': 'primary checkbox' }}
-        /> */}
-        {/* <span style={{ color: 'black' }}>Dark</span> */}
-        {/* <FormControlLabel control={<Switch color="primary" />} label="Dark" />
-        <FormControlLabel
-          control={<Switch color="primary" />}
-          label="Primary"
-        /> */}
+        />
+        <span style={{ color: 'black' }}>Dark</span> */}
+
+        {/* <FormControlLabel control={<Switch color="secondary" />} label="Dark" /> */}
 
         <IconButton>
           <AccountCircleSharp fontSize="large" />
         </IconButton>
+
+        {/* <IconButton>
+          <Settings fontSize="large" />
+        </IconButton> */}
       </Toolbar>
     </AppBar>
   )

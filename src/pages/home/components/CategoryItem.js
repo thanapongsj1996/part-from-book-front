@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   item: {
-    boxShadow: ' 0px 0px 15px -3px rgba(0,0,0,0.75)',
+    boxShadow: '0px 0px 4px -2px rgba(0,0,0,0.75)',
+    backgroundColor: theme.palette.primary[theme.palette.type],
   },
 }))
 

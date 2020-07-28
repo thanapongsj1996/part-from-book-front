@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Grid, CircularProgress } from '@material-ui/core'
+import { Grid, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
-import CategoryList from './CategoryList'
 import ArticleItem from './ArticleItem'
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    textAlign: 'center',
-    marginBottom: theme.spacing(2),
-  },
   article: {
     marginBottom: theme.spacing(2),
   },
@@ -40,12 +35,6 @@ export default function AricleList() {
 
   return (
     <>
-      <Typography className={classes.title} variant="h4" component="h1">
-        บทความทั้งหมด
-      </Typography>
-
-      <CategoryList />
-
       {isLoading ? (
         <div className={classes.progress}>
           <CircularProgress color="secondary" />

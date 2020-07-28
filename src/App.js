@@ -6,16 +6,18 @@ import {
   ThemeProvider,
 } from '@material-ui/core/styles'
 
-import HomeLayout from 'pages/home/components/HomeLayout'
+import Routes from 'Routes'
 
 export default function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const theme = createMuiTheme({
     palette: {
-      type: prefersDarkMode ? 'light' : 'light',
+      type: prefersDarkMode ? 'dark' : 'light',
       primary: {
         main: 'rgba(49, 28, 135, 0.95)',
+        light: '#5F64FF',
+        dark: '#676768',
       },
       secondary: {
         main: '#BDC3C7',
@@ -26,7 +28,7 @@ export default function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <HomeLayout />
+        <Routes />
       </ThemeProvider>
     </Router>
   )

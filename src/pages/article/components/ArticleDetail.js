@@ -15,17 +15,17 @@ const useStyles = makeStyles((theme) => ({
     height: 350,
   },
   card: {
-    boxShadow: '0px 0px 15px -3px rgba(0,0,0,0.75)',
+    boxShadow: '0px 0px 4px -1px rgba(0,0,0,0.75)',
   },
   writerName: {
     fontSize: 18,
   },
   title: {
-    color: '#313233',
+    color: theme.palette.text.primary,
     padding: '16px 16px 0px 16px',
   },
   body: {
-    color: '#313233',
+    color: theme.palette.text.primary,
     fontSize: 18,
   },
 }))
@@ -37,12 +37,8 @@ export default function ArticleDetail() {
     <main>
       <Grid container justify="center">
         <Grid item xs={12} sm={10} md={8} lg={8}>
-          <Card>
-            <Typography
-              variant="title"
-              className={classes.title}
-              component="h1"
-            >
+          <Card className={classes.card}>
+            <Typography variant="h4" className={classes.title} component="h1">
               Milk and Honey
             </Typography>
 
@@ -60,7 +56,11 @@ export default function ArticleDetail() {
             />
 
             <CardContent>
-              <Typography variant="body" className={classes.body} component="p">
+              <Typography
+                variant="body1"
+                className={classes.body}
+                component="p"
+              >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet,
                 consectetur adipiscing elit. Etiam condimentum lectus sed quam
                 vehicula, in posuere lorem sagittis. Pellentesque habitant morbi

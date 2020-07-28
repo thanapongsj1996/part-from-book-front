@@ -1,10 +1,8 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
 import { Container, Toolbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import ArticleList from './ArticleList'
-import ArticleDatail from '../../article/ArticleDetail'
+import ArticleDatail from './components/ArticleDetail'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -18,14 +16,7 @@ export default function Content() {
     <main className={classes.content}>
       <Container maxWidth="lg">
         <Toolbar />
-        <Switch>
-          <Route path="/article">
-            <ArticleDatail />
-          </Route>
-          <Route path="/">
-            <ArticleList />
-          </Route>
-        </Switch>
+        <ArticleDatail />
       </Container>
     </main>
   )
