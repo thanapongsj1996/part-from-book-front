@@ -61,6 +61,12 @@ export default function ArticleDetail() {
                 className={classes.body}
                 component="p"
               >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ส่วนหนึ่งของหนังสือ
+                จึงรวบรวมบทความและคอร์สอบรมอันหลากหลาย
+                เพื่อตอบสนองการเขียนโปรแกรมในแต่ละภาษา
+                พร้อมหลักการที่สำคัญเช่นคณิตศาสตร์และอัลกอริทึม
+                <br />
+                <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet,
                 consectetur adipiscing elit. Etiam condimentum lectus sed quam
                 vehicula, in posuere lorem sagittis. Pellentesque habitant morbi
@@ -71,44 +77,6 @@ export default function ArticleDetail() {
                 viverra ante ac lacinia scelerisque. Etiam convallis in purus
                 nec condimentum. Fusce vitae sem tellus. Aenean commodo odio sed
                 interdum pellentesque. Sed nec
-                <br />
-                <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lacus at nibh consequat
-                lobortis. Nulla sit amet tincidunt ligula. Sed tempor interdum
-                libero, ac rhoncus sem egestas a. Fusce sed dui neque. Morbi eu
-                metus mauris. Maecenas velit ex, efficitur vitae justo id,
-                tincidunt ultricies metus. Aliquam ut neque id quam condimentum
-                fringilla sit amet fringilla erat. Nunc luctus elit imperdiet
-                lectus ullamcorper tempor. Aenean aliquam vel ligula at
-                ultrices. Nullam ac nulla id arcu malesuada mattis in vel risus.
-                Mauris scelerisque dui eu ultricies ullamcorper. Donec id risus
-                et felis aliquet vestibulum ac nec nulla. Curabitur tincidunt
-                velit leo, ac lobortis nisl efficitur eget. Morbi pharetra diam
-                sit amet dolor semper, ultrices euismod lectus venenatis. Donec
-                sollicitudin, odio sed ultrices accumsan, nisl enim fringilla
-                ante, quis accumsan nibh enim vitae nibh. Curabitur eu sapien a
-                tellus condimentum tristique. Ut et diam at arcu dignissim
-                <br />
-                <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auctor sodales sed massa.
-                Donec lectus urna, rutrum at lacus sit amet, placerat dictum
-                felis. Donec a ultrices dolor, ut vulputate ipsum. Curabitur non
-                tellus accumsan, tempor nulla a, cursus ligula. Nullam ac tortor
-                magna. In gravida purus sed molestie sollicitudin. Curabitur
-                maximus lobortis orci, ac porttitor ligula sagittis ut. In enim
-                enim, luctus a dignissim a, auctor eu neque. Aliquam et sem
-                mollis, porttitor nulla vel, pulvinar magna. Class aptent taciti
-                <br />
-                <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sociosqu ad litora torquent
-                per conubia nostra, per inceptos himenaeos. Vestibulum eget mi
-                id tellus elementum consectetur non finibus dui. Nullam non
-                faucibus purus. Morbi blandit urna et est dapibus lobortis.
-                Nulla mattis in ex a accumsan. Proin at auctor libero, eu
-                ultricies sem. Donec feugiat odio eu augue rhoncus egestas.
-                Donec accumsan, velit vel finibus aliquam, ligula lectus lacinia
-                nunc, id posuere libero augue quis nulla. Mauris id arcu nec sem
-                volutpat porta in sed ligula. Maecenas rhoncus,
                 <br />
                 <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sapien facilisis cursus

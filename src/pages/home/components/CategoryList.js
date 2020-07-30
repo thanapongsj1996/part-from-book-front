@@ -7,15 +7,15 @@ import CategoryItem from './CategoryItem'
 
 const categories = [
   {
-    title: 'All',
+    title: 'ทั้งหมด',
     Icon: Public,
   },
   {
-    title: 'New',
+    title: 'มาใหม่',
     Icon: Book,
   },
   {
-    title: 'Popular',
+    title: 'ยอดนิยม',
     Icon: Star,
   },
 ]

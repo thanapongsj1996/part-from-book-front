@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontFamily: 'Prompt',
     backgroundColor: theme.palette.primary[theme.palette.type],
   },
   writerName: {
