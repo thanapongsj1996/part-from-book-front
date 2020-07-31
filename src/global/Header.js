@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -17,21 +17,6 @@ import { AccountCircleSharp, Menu } from '@material-ui/icons'
 
 import logo from 'assets/images/small-logo.png'
 
-const menuList = [
-  {
-    title: 'หน้าหลัก',
-    url: '',
-  },
-  {
-    title: 'บทความ',
-    url: '',
-  },
-  {
-    title: 'เกี่ยวกับเรา',
-    url: '',
-  },
-]
-
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
@@ -48,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
   },
   userIconPopover: {
     fontSize: 100,
+  },
+  userIconPopoverProfile: {
+    fontSize: 80,
+  },
+  profileSection: {
+    textAlign: 'left',
+  },
+  profileHeader: {
+    fontSize: 18,
   },
   userNamePopover: {
     textAlign: 'center',
@@ -67,6 +61,14 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Prompt',
     color: theme.palette.text.primary,
   },
+  navButtonPopoverProfile: {
+    width: '100%',
+    fontSize: 15,
+    fontWeight: 400,
+    fontFamily: 'Prompt',
+    paddingRight: 20,
+    color: theme.palette.text.primary,
+  },
   spacer: {
     flexGrow: 1,
   },
@@ -83,8 +85,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     marginTop: theme.spacing(1),
   },
-  popover2: {
-    padding: '12px 28px 12px 12px',
+  popoverProfile: {
+    padding: 12,
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -93,10 +95,30 @@ const useStyles = makeStyles((theme) => ({
   textCenter: {
     textAlign: 'center',
   },
+  authLabel: {
+    textTransform: 'none',
+  },
 }))
+
+const menuList = [
+  {
+    title: 'หน้าหลัก',
+    url: '/',
+  },
+  {
+    title: 'บทความ',
+    url: '/article',
+  },
+  {
+    title: 'เกี่ยวกับเรา',
+    url: '',
+  },
+]
 
 export default function Header() {
   const classes = useStyles()
+  const history = useHistory()
+
   const [profilePopover, setProfilePopover] = useState(null)
   const [menuPopover, setMenuPopover] = useState(null)
 
@@ -118,6 +140,8 @@ export default function Header() {
   const showMenuPopover = Boolean(menuPopover)
   const showProfilePopover = Boolean(profilePopover)
 
+  const navigateToProfile = () => history.push(`/article/1`)
+
   return (
     <AppBar className={classes.appBar} position="fixed">
       <Toolbar>
@@ -136,6 +160,8 @@ export default function Header() {
         <Hidden only={['xs']}>
           {menuList.map((menu) => (
             <Button
+              component={RouterLink}
+              to={menu.url}
               className={classes.navButton}
               aria-controls="simple-menu"
               aria-haspopup="true"
@@ -143,6 +169,21 @@ export default function Header() {
               {menu.title}
             </Button>
           ))}
+
+          {/* <Divider
+            flexItem
+            orientation="vertical"
+            classes={{ flexItem: classes.divider }}
+          />
+
+          <Button
+            classes={{ root: classes.authLabel }}
+            className={classes.navButton}
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+          >
+            เข้าสู่ระบบ
+          </Button> */}
 
           <Divider
             flexItem
@@ -156,12 +197,13 @@ export default function Header() {
               onClick={onShowProfilePopover}
             />
           </IconButton>
+
           <Popover
             id="popover-menu"
             open={showProfilePopover}
             anchorEl={profilePopover}
             onClose={onCloseProfilePopover}
-            classes={{ paper: classes.popover2 }}
+            classes={{ paper: classes.popoverProfile }}
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'center',
@@ -171,21 +213,44 @@ export default function Header() {
               horizontal: 'right',
             }}
           >
-            <Grid
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="center"
-              spacing={1}
-            >
-              <Grid item>
-                <AccountCircleSharp className={classes.userIconPopover} />
+            <Grid container>
+              <Button
+                item
+                xs={12}
+                className={classes.navButtonPopoverProfile}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+              >
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Grid item>
+                    <AccountCircleSharp
+                      className={classes.userIconPopoverProfile}
+                    />
+                  </Grid>
+
+                  <Grid item className={classes.profileSection}>
+                    <div className={classes.profileHeader}>
+                      Thanapong Somjai
+                    </div>
+                    <div>ดูโปรไฟล์ของคุณ</div>
+                  </Grid>
+                </Grid>
+              </Button>
+              <Grid item xs={12} className={classes.dividerPopover}>
+                <Divider variant="middle" color="primary" />
               </Grid>
-              <Grid item>
-                Thanapong Somjai
-                <br />
-                ดูโปรไฟล์ของคุณ
-              </Grid>
+            </Grid>
+
+            <Grid container justify="center">
+              <Button item xs={12} className={classes.navButtonPopover}>
+                ออกจากระบบ
+              </Button>
             </Grid>
           </Popover>
         </Hidden>
@@ -217,7 +282,7 @@ export default function Header() {
             >
               <Grid className={classes.typography} container>
                 <Grid item xs={12} className={classes.textCenter}>
-                  <IconButton>
+                  <IconButton onClick={navigateToProfile}>
                     <AccountCircleSharp className={classes.userIconPopover} />
                   </IconButton>
                 </Grid>
@@ -227,6 +292,7 @@ export default function Header() {
                     className={classes.navButtonPopover}
                     aria-controls="simple-menu"
                     aria-haspopup="true"
+                    onClick={navigateToProfile}
                   >
                     Thanapong Somjai
                   </Button>

@@ -24,7 +24,8 @@ export default function AricleList() {
     const fetchArticles = async () => {
       setIsLoading(true)
 
-      const url = 'https://part-from-book.herokuapp.com/api/v1/article'
+      const url =
+        'https://part-from-book-api-j4vlqdhg7q-an.a.run.app/api/v1/article'
       const { data } = await axios.get(url)
 
       setArticles(data.data)
