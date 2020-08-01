@@ -257,12 +257,8 @@ export default function Header() {
           </Hidden>
 
           <Hidden only={['sm', 'md', 'lg', 'xl']}>
-            <IconButton>
-              <Menu
-                fontSize="large"
-                className={classes.whiteIcon}
-                onClick={onShowMenuPopover}
-              />
+            <IconButton onClick={onShowMenuPopover}>
+              <Menu fontSize="large" className={classes.whiteIcon} />
             </IconButton>
 
             <Backdrop
