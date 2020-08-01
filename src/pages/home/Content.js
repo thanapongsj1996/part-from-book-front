@@ -12,10 +12,10 @@ export default function Content() {
   const classes = useStyles()
   return (
     <main className={classes.content}>
-      <Container maxWidth="lg">
-        <Toolbar />
-        <h1>Home page</h1>
-      </Container>
+      {/* <Container maxWidth="lg"> */}
+      <Toolbar />
+      <h1>Home page</h1>
+      {/* </Container> */}
     </main>
   )
 }

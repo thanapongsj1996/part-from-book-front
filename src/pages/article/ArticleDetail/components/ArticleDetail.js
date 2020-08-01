@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
+import utils from 'utils'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function ArticleDetail() {
-  // const { id } = useParams()
+  const { id } = useParams()
+  console.log('article id: ', id)
   const classes = useStyles()
 
   return (
@@ -47,7 +49,7 @@ export default function ArticleDetail() {
             <CardHeader
               avatar={<Avatar aria-label="recipe">T</Avatar>}
               title="Thanapong Somjai"
-              subheader="June 3, 1996"
+              subheader={utils.timeConverted('2020-06-19T18:47:18.807Z')}
               classes={{ title: classes.writerName }}
             />
 
