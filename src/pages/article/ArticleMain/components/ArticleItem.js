@@ -54,8 +54,8 @@ export default function ProductItem(props) {
         <CardMedia
           onClick={navigateToDetail}
           className={classes.media}
-          // image={articlePhoto}
-          image="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+          image={articlePhoto}
+          // image="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
           title="Paella dish"
         />
 

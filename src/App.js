@@ -13,7 +13,7 @@ export default function App() {
 
   const theme = createMuiTheme({
     palette: {
-      type: prefersDarkMode ? 'light' : 'light',
+      type: prefersDarkMode ? 'dark' : 'light',
       primary: {
         main: 'rgba(49, 28, 135, 0.95)',
         light: '#5F64FF',

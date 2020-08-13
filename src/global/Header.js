@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link as RouterLink, useHistory } from 'react-router-dom'
+import { Link as RouterLink, useHistory, useRouteMatch } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -16,13 +16,18 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { AccountCircleSharp, Menu } from '@material-ui/icons'
 
-import logo from 'assets/images/logo.png'
+import logo from 'assets/images/book-logo.png'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
     backgroundColor: '#0e4e9c',
     boxShadow: '0px 0px 4px 0px rgba(0,0,0,0.75)',
+  },
+  appBarBlack: {
+    zIndex: theme.zIndex.drawer,
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    border: 0,
   },
   logoLink: {
     marginRight: theme.spacing(1),
@@ -127,9 +132,11 @@ const menuList = [
 export default function Header() {
   const classes = useStyles()
   const history = useHistory()
+  const { path } = useRouteMatch()
 
   const [profilePopover, setProfilePopover] = useState(null)
   const [menuPopover, setMenuPopover] = useState(null)
+  const [scrollTop, setScrollTop] = useState(0)
 
   const onShowProfilePopover = (event) => {
     setProfilePopover(event.currentTarget)
@@ -151,8 +158,17 @@ export default function Header() {
 
   const navigateToProfile = () => history.push(`/article/1`)
 
+  window.onscroll = () => {
+    setScrollTop(document.documentElement.scrollTop)
+  }
+
   return (
-    <AppBar className={classes.appBar} position="fixed">
+    <AppBar
+      className={
+        scrollTop < 500 && path === '/' ? classes.appBarBlack : classes.appBar
+      }
+      position="fixed"
+    >
       <Container>
         <Toolbar>
           <Link
