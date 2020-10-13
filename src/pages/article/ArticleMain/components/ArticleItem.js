@@ -39,7 +39,7 @@ export default function ProductItem(props) {
   const classes = useStyles()
   const history = useHistory()
 
-  const navigateToDetail = () => history.push(`/article/${_id}`)
+  const navigateToDetail = () => history.push(`/articles/${_id}`)
 
   return (
     <Grid item xs={12} sm={9} md={6} lg={4}>

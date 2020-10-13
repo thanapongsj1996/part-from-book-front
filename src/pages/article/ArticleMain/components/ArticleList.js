@@ -25,7 +25,7 @@ export default function AricleList() {
       setIsLoading(true)
 
       const url =
-        'https://part-from-book-api-j4vlqdhg7q-an.a.run.app/api/v1/article'
+        'https://part-from-book-api-j4vlqdhg7q-an.a.run.app/api/v1/articles'
       const { data } = await axios.get(url)
 
       setArticles(data.data)

@@ -121,7 +121,7 @@ const menuList = [
   },
   {
     title: 'บทความ',
-    url: '/article',
+    url: '/articles',
   },
   {
     title: 'เกี่ยวกับเรา',

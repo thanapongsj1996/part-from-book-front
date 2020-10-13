@@ -7,7 +7,7 @@ import ArticleRoutes from 'pages/article/ArticleRoutes'
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/article">
+      <Route path="/articles">
         <ArticleRoutes />
       </Route>
       <Route path="/">
