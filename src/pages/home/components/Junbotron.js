@@ -39,7 +39,7 @@ export default function Jumbotro() {
       <Container>
         <Grid container direction="row" alignItems="center">
           <Grid item md={8}>
-            <div className={classes.item}>หนังสือทุกเล่มมีเรื่องราว</div>
+            <div className={classes.item}>หนังสือทุกเล่มต่างก็มีเรื่องราว</div>
             <p className={classes.body}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               sodales non turpis nec sodales. In eget velit vel erat tempus
