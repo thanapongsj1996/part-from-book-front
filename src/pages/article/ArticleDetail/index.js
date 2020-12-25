@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Header from 'global/Header'
+import Header from 'layouts/Header'
 import Content from './Content'
 
 export default function Layout() {

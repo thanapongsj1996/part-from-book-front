@@ -6,7 +6,7 @@ import {
   ThemeProvider,
 } from '@material-ui/core/styles'
 
-import Routes from 'Routes'
+import Routes from './routes'
 
 export default function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -24,6 +24,7 @@ export default function App() {
       },
     },
   })
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
