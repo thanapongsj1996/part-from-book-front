@@ -1,13 +1,14 @@
 import React from 'react'
 
-import Header from 'layouts/Header'
-import Content from './Content'
+import Jumbotron from './components/Junbotron'
+import WebDetail from './components/WebDetail'
 
-export default function Layout() {
+export default function Content() {
   return (
-    <>
-      <Header />
-      <Content />
-    </>
+    <main>
+      <Jumbotron />
+      <WebDetail />
+      <div style={{ height: 2000 }}></div>
+    </main>
   )
 }
