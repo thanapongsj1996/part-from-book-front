@@ -62,11 +62,7 @@ export default function WebDetail() {
             >
               เขียนเรื่องราวของคุณ
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               sodales non turpis nec sodales.
             </Typography>
@@ -81,11 +77,7 @@ export default function WebDetail() {
             >
               อ่านและร่วมแสดงความเห็น
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               In eget velit vel erat tempus viverra ac sit amet massa. In
               blandit egestas elit. Maecenas diam ligula, dapibu
             </Typography>
@@ -100,11 +92,7 @@ export default function WebDetail() {
             >
               ตั้งเป้าหมายในการอ่าน
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               In eget velit vel erat tempus viverra ac sit amet massa. In
               blandit egestas elit. Maecenas diam ligula, dapibu
             </Typography>

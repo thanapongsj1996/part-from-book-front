@@ -60,11 +60,7 @@ export default function ArticleDetail() {
             />
 
             <CardContent>
-              <Typography
-                variant="body1"
-                className={classes.body}
-                component="p"
-              >
+              <Typography variant="body1" className={classes.body}>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ส่วนหนึ่งของหนังสือ
                 จึงรวบรวมบทความและคอร์สอบรมอันหลากหลาย
                 เพื่อตอบสนองการเขียนโปรแกรมในแต่ละภาษา
