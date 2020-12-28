@@ -3,6 +3,7 @@ import { Grid, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
+import Api from 'api'
 import ArticleItem from './ArticleItem'
 
 const useStyles = makeStyles((theme) => ({
@@ -24,8 +25,7 @@ export default function AricleList() {
     const fetchArticles = async () => {
       setIsLoading(true)
 
-      const url =
-        'https://part-from-book-api-j4vlqdhg7q-an.a.run.app/api/v1/articles'
+      const url = Api.getAllArticles()
       const { data } = await axios.get(url)
 
       setArticles(data.data)
