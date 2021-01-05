@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    padding: theme.spacing(18, 2, 15, 2),
+    padding: theme.spacing(18, 0, 15),
     color: 'white',
   },
   item: {
