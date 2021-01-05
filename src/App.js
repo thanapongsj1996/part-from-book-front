@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { CssBaseline, useMediaQuery } from '@material-ui/core'
+import { useMediaQuery } from '@material-ui/core'
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
   ThemeProvider,
@@ -25,13 +25,15 @@ export default function App() {
         main: '#BDC3C7',
       },
     },
+    typography: {
+      fontFamily: "'Poppins', 'Prompt', sans-serif !important",
+      fontWeightBold: 600,
+    },
   })
 
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-
         <Header />
 
         <Routes />

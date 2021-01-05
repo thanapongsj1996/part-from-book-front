@@ -45,7 +45,6 @@ export default makeStyles((theme) => ({
   navButton: {
     fontSize: 18,
     fontWeight: 400,
-    fontFamily: 'Prompt',
     margin: theme.spacing(0, 1),
     color: 'white',
   },
@@ -53,14 +52,12 @@ export default makeStyles((theme) => ({
     width: '100%',
     fontSize: 18,
     fontWeight: 400,
-    fontFamily: 'Prompt',
     color: theme.palette.text.primary,
   },
   navButtonPopoverProfile: {
     width: '100%',
     fontSize: 15,
     fontWeight: 400,
-    fontFamily: 'Prompt',
     paddingRight: 20,
     color: theme.palette.text.primary,
   },

@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    fontFamily: 'Prompt',
     padding: theme.spacing(18, 2, 15, 2),
     color: 'white',
   },

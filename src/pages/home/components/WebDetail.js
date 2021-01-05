@@ -9,7 +9,6 @@ import goalImg from 'assets/images/goal-detail.png'
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: 'center',
-    fontFamily: 'Prompt',
     padding: theme.spacing(10, 0, 8, 0),
   },
   divider: {
@@ -23,13 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   detailHeader: {
     textAlign: 'center',
-    fontFamily: 'Prompt',
     fontSize: 24,
     padding: theme.spacing(3, 0, 1, 0),
   },
   detailBody: {
     textAlign: 'left',
-    fontFamily: 'Prompt',
     fontSize: 20,
     padding: theme.spacing(1, 2),
   },
