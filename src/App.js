@@ -6,9 +6,10 @@ import {
   ThemeProvider,
 } from '@material-ui/core/styles'
 
+import Header from './layouts/Header'
 import Routes from './routes'
 
-import Header from 'layouts/Header'
+import COLOR from './assets/scss/variables/__colors.scss'
 
 export default function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -17,9 +18,9 @@ export default function App() {
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
       primary: {
-        main: 'rgba(49, 28, 135, 0.95)',
-        light: '#5F64FF',
-        dark: '#676768',
+        main: COLOR.primary,
+        light: COLOR.primaryLighter,
+        dark: COLOR.primaryDarker,
       },
       secondary: {
         main: '#BDC3C7',

@@ -1,0 +1,36 @@
+// Primary Colors
+$primary-color: #162753;
+$primary-lighter-color: #445275;
+$primary-darker-color: #0f1b3a;
+
+// Secondary Colors
+$while-color: #ffffff;
+$black-color: #000000;
+
+$grey-1-color: #f9f9f9;
+$grey-2-color: #535353;
+$grey-3-color: #c4c4c4;
+
+$dark-1-color: #181818;
+$dark-2-color: #212121;
+$dark-3-color: #383838;
+
+// Specific Colors
+
+// Export for JS Script
+:export {
+  primary: $primary-color;
+  primaryLigher: $primary-lighter-color;
+  primaryDarker: $primary-darker-color;
+
+  white: $while-color;
+  black: $black-color;
+
+  grey1: $grey-1-color;
+  grey2: $grey-2-color;
+  grey3: $grey-3-color;
+
+  dark1: $dark-1-color;
+  dark2: $dark-2-color;
+  dark3: $dark-3-color;
+}
