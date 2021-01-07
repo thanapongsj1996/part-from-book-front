@@ -34,3 +34,7 @@ $dark-3-color: #383838;
   dark2: $dark-2-color;
   dark3: $dark-3-color;
 }
+
+:root {
+  --background-color: #{$grey-1-color};
+}
