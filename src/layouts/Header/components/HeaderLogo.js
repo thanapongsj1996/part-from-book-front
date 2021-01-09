@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     width: 40,
     height: 30,
   },
+  label: {
+    fontWeight: 600,
+  },
 }))
 
 const HeaderLogo = ({ darkMode }) => {
@@ -37,7 +40,7 @@ const HeaderLogo = ({ darkMode }) => {
         </Grid>
         <Hidden xsDown>
           <Grid item>
-            <Typography component="h1" variant="h6">
+            <Typography className={classes.label} component="h1" variant="h6">
               เรื่องเล่าจากหนังสือ
             </Typography>
           </Grid>

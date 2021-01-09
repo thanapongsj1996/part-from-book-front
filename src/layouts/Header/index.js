@@ -38,13 +38,12 @@ const Header = ({ darkMode, actions, ...props }) => {
           <div className={classes.spacer} />
 
           {/* dark mode swith */}
-          <Tooltip title="Toggle light/dark theme" arrow>
+          <Tooltip title="โหมดกลางคืน" arrow>
             <Switch
               checked={darkMode}
               onChange={actions.toggleDarkMode}
               color="secondary"
-              name="checkedB"
-              inputProps={{ 'aria-label': 'primary checkbox' }}
+              inputProps={{ 'aria-label': 'toggle theme' }}
             />
           </Tooltip>
 
