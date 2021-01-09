@@ -48,6 +48,30 @@ const ThemeOverride = ({ darkMode, children }) => {
             color: getHeaderTextColor,
           },
         },
+        overrides: {
+          MuiTimeline: {
+            root: {
+              fontSize: 20,
+              fontWeight: 400,
+              color: COLOR.grey1,
+            },
+          },
+          MuiTimelineContent: {
+            root: {
+              paddingTop: 0,
+            },
+          },
+          MuiTimelineDot: {
+            defaultGrey: {
+              backgroundColor: COLOR.grey1,
+            },
+          },
+          MuiTimelineConnector: {
+            root: {
+              backgroundColor: COLOR.grey1,
+            },
+          },
+        },
       }),
     [darkMode, getHeaderTextColor]
   )

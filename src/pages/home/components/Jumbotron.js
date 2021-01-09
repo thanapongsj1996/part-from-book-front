@@ -1,6 +1,8 @@
 import React from 'react'
-import { Grid, Container } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
+import JumbotronTimeline from './JumbotronTimeline'
 
 import background from 'assets/images/jumbotron-background.png'
 
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    padding: theme.spacing(18, 0, 15),
+    padding: theme.spacing(11, 0, 8),
     color: 'white',
   },
   item: {
@@ -35,18 +37,7 @@ export default function Jumbotro() {
   return (
     <section className={classes.jumbotron}>
       <Container>
-        <Grid container direction="row" alignItems="center">
-          <Grid item md={8}>
-            <div className={classes.item}>หนังสือทุกเล่มมีเรื่องราว</div>
-            <p className={classes.body}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              sodales non turpis nec sodales. In eget velit vel erat tempus
-              viverra ac sit amet massa. In blandit egestas elit. Maecenas diam
-              ligula, dapibu
-            </p>
-          </Grid>
-          <Grid item md={4} />
-        </Grid>
+        <JumbotronTimeline />
       </Container>
     </section>
   )
