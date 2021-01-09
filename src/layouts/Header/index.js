@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { connect } from 'react-redux'
 import { AppBar, Toolbar, Container, Switch, Tooltip } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -12,25 +12,70 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
+    transition: 'opacity .5s',
+    opacity: 1,
+  },
+  appBarDefault: {
     backgroundColor: COLOR.white,
   },
   appBarDark: {
-    zIndex: theme.zIndex.drawer,
     backgroundColor: COLOR.dark1,
-    border: 0,
+  },
+  hide: {
+    opacity: 0,
+    pointerEvents: 'none',
   },
   spacer: {
     flexGrow: 1,
   },
 }))
 const Header = ({ darkMode, actions, ...props }) => {
+  const [showHeader, setShowHeader] = useState(false)
   const classes = useStyles()
 
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll)
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll)
+    }
+  })
+
+  const handleScroll = () => {
+    const { scrollY } = window
+
+    if (scrollY < 500 && showHeader) {
+      setShowHeader(false)
+    } else if (scrollY >= 500 && !showHeader) {
+      setShowHeader(true)
+    }
+  }
+
+  const appBarClasses = useMemo(() => {
+    const classList = [classes.appBar]
+
+    if (darkMode) {
+      classList.push(classes.appBarDark)
+    } else {
+      classList.push(classes.appBarDefault)
+    }
+
+    if (!showHeader) {
+      classList.push(classes.hide)
+    }
+
+    return classList.join(' ')
+  }, [
+    classes.appBar,
+    classes.appBarDark,
+    classes.appBarDefault,
+    classes.hide,
+    darkMode,
+    showHeader,
+  ])
+
   return (
-    <AppBar
-      className={darkMode ? classes.appBarDark : classes.appBar}
-      position="fixed"
-    >
+    <AppBar className={appBarClasses} position="fixed">
       <Container>
         <Toolbar>
           <HeaderLogo darkMode={darkMode} />
