@@ -14,9 +14,11 @@ import {
   Container,
 } from '@material-ui/core'
 import { AccountCircleSharp, Menu } from '@material-ui/icons'
+import { connect } from 'react-redux'
 
 import useStyles from './header-style'
 import logo from 'assets/images/book-logo.png'
+import { toggleDarkMode } from 'actions/app.action'
 
 const menuList = [
   {
@@ -33,7 +35,7 @@ const menuList = [
   },
 ]
 
-export default function Header() {
+const Header = ({ darkMode, actions, ...props }) => {
   const classes = useStyles()
   const history = useHistory()
   const { path } = useRouteMatch()
@@ -264,3 +266,12 @@ export default function Header() {
     </AppBar>
   )
 }
+
+const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+
+const mapActions = { toggleDarkMode }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(Header)

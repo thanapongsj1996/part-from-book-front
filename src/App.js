@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useMediaQuery } from '@material-ui/core'
@@ -16,17 +16,17 @@ import { LOCAL_STORAGE } from './global/constants/storage.const'
 import COLOR from './assets/scss/variables/__colors.scss'
 
 // Actions
-import { toggleDarkMode, setDarkMode } from './actions/app.action'
+import { setDarkMode } from './actions/app.action'
 
 // Assets
 
-const App = ({ appState, ...props }) => {
+const App = ({ appState, actions, ...props }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   useEffect(() => {
     const darkMode =
       localStorage.getItem(LOCAL_STORAGE.DARK_MODE_KEY) === 'true'
-    props.setDarkMode(!!(darkMode || prefersDarkMode))
+    // actions.setDarkMode(!!(darkMode || prefersDarkMode))
 
     if (!darkMode) {
       localStorage.setItem(LOCAL_STORAGE.DARK_MODE_KEY, prefersDarkMode)
@@ -75,6 +75,9 @@ const App = ({ appState, ...props }) => {
 
 const mapStates = ({ appState }) => ({ appState })
 
-const mapActions = { toggleDarkMode, setDarkMode }
+const mapActions = { setDarkMode }
 
-export default connect(mapStates, mapActions)(App)
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(App)
