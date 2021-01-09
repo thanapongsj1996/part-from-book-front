@@ -2,12 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useMediaQuery } from '@material-ui/core'
-import {
-  unstable_createMuiStrictModeTheme as createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles'
 
 // Components
+import ThemeOverride from './theme'
 import Header from './layouts/Header'
 import Routes from './routes'
 
@@ -40,35 +37,13 @@ const App = ({ appState, actions, ...props }) => {
     document.body.style.backgroundColor = backgroundColor
   }, [appState.darkMode])
 
-  const theme = useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: appState.darkMode ? 'dark' : 'light',
-          primary: {
-            main: COLOR.primary,
-            light: COLOR.primaryLighter,
-            dark: COLOR.primaryDarker,
-          },
-          secondary: {
-            main: '#BDC3C7',
-          },
-        },
-        typography: {
-          fontFamily: "'Poppins', 'Prompt', sans-serif !important",
-          fontWeightBold: 600,
-        },
-      }),
-    [appState.darkMode]
-  )
-
   return (
     <Router>
-      <ThemeProvider theme={theme}>
+      <ThemeOverride darkMode={appState.darkMode}>
         <Header />
 
         <Routes />
-      </ThemeProvider>
+      </ThemeOverride>
     </Router>
   )
 }
