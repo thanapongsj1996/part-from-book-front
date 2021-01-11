@@ -1,35 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { CssBaseline, useMediaQuery } from '@material-ui/core'
-import {
-  unstable_createMuiStrictModeTheme as createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles'
+import { useMediaQuery } from '@material-ui/core'
 
-import Routes from 'Routes'
+// Components
+import ThemeOverride from './theme'
+import Header from './layouts/Header'
+import Routes from './routes'
 
-export default function App() {
+// Constants
+import { LOCAL_STORAGE } from './global/constants/storage.const'
+import COLOR from './assets/scss/variables/__colors.scss'
+
+// Actions
+import { setDarkMode } from './actions/app.action'
+
+// Assets
+
+const App = ({ appState, actions, ...props }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
-  const theme = createMuiTheme({
-    palette: {
-      type: prefersDarkMode ? 'dark' : 'light',
-      primary: {
-        main: 'rgba(49, 28, 135, 0.95)',
-        light: '#5F64FF',
-        dark: '#676768',
-      },
-      secondary: {
-        main: '#BDC3C7',
-      },
-    },
-  })
+  useEffect(() => {
+    const darkMode =
+      localStorage.getItem(LOCAL_STORAGE.DARK_MODE_KEY) === 'true'
+    // actions.setDarkMode(!!(darkMode || prefersDarkMode))
+
+    if (!darkMode) {
+      localStorage.setItem(LOCAL_STORAGE.DARK_MODE_KEY, prefersDarkMode)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefersDarkMode])
+
+  // Update body background color
+  useEffect(() => {
+    const backgroundColor = appState.darkMode ? COLOR.dark1 : COLOR.grey1
+    document.body.style.backgroundColor = backgroundColor
+  }, [appState.darkMode])
+
   return (
     <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <ThemeOverride darkMode={appState.darkMode}>
+        <Header />
+
         <Routes />
-      </ThemeProvider>
+      </ThemeOverride>
     </Router>
   )
 }
+
+const mapStates = ({ appState }) => ({ appState })
+
+const mapActions = { setDarkMode }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(App)

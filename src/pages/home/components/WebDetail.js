@@ -9,7 +9,6 @@ import goalImg from 'assets/images/goal-detail.png'
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: 'center',
-    fontFamily: 'Prompt',
     padding: theme.spacing(10, 0, 8, 0),
   },
   divider: {
@@ -23,13 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   detailHeader: {
     textAlign: 'center',
-    fontFamily: 'Prompt',
     fontSize: 24,
     padding: theme.spacing(3, 0, 1, 0),
   },
   detailBody: {
     textAlign: 'left',
-    fontFamily: 'Prompt',
     fontSize: 20,
     padding: theme.spacing(1, 2),
   },
@@ -62,11 +59,7 @@ export default function WebDetail() {
             >
               เขียนเรื่องราวของคุณ
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               sodales non turpis nec sodales.
             </Typography>
@@ -81,11 +74,7 @@ export default function WebDetail() {
             >
               อ่านและร่วมแสดงความเห็น
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               In eget velit vel erat tempus viverra ac sit amet massa. In
               blandit egestas elit. Maecenas diam ligula, dapibu
             </Typography>
@@ -100,11 +89,7 @@ export default function WebDetail() {
             >
               ตั้งเป้าหมายในการอ่าน
             </Typography>
-            <Typography
-              className={classes.detailBody}
-              variant="p"
-              component="p"
-            >
+            <Typography className={classes.detailBody} variant="body1">
               In eget velit vel erat tempus viverra ac sit amet massa. In
               blandit egestas elit. Maecenas diam ligula, dapibu
             </Typography>

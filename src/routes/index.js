@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import HomeRoutes from 'pages/home/HomeRoutes'
-import ArticleRoutes from 'pages/article/ArticleRoutes'
+import HomeRoutes from './home.route'
+import ArticleRoutes from './article.route'
 
 export default function Routes() {
   return (
