@@ -7,8 +7,13 @@ import {
 import COLOR from 'assets/scss/variables/__colors.scss'
 
 const ThemeOverride = ({ darkMode, children }) => {
-  const getHeaderTextColor = useMemo(
+  const getTitleTextColor = useMemo(
     () => (darkMode ? COLOR.white : COLOR.primary),
+    [darkMode]
+  )
+
+  const getSubTitleTextColor = useMemo(
+    () => (darkMode ? COLOR.white : COLOR.black),
     [darkMode]
   )
 
@@ -30,22 +35,26 @@ const ThemeOverride = ({ darkMode, children }) => {
           fontFamily: "'Poppins', 'Prompt', sans-serif !important",
           fontWeightBold: 600,
           h1: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
           },
           h2: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
           },
           h3: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
           },
           h4: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
           },
           h5: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
           },
           h6: {
-            color: getHeaderTextColor,
+            color: getTitleTextColor,
+          },
+          subtitle1: {
+            lineHeight: 2.5,
+            color: getSubTitleTextColor,
           },
         },
         overrides: {
@@ -73,7 +82,7 @@ const ThemeOverride = ({ darkMode, children }) => {
           },
         },
       }),
-    [darkMode, getHeaderTextColor]
+    [darkMode, getSubTitleTextColor, getTitleTextColor]
   )
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>
