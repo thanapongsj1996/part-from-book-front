@@ -7,7 +7,7 @@ import JumbotronTimeline from './JumbotronTimeline'
 import background from 'assets/images/jumbotron-background.png'
 
 const useStyles = makeStyles((theme) => ({
-  jumbotron: {
+  root: {
     width: '100%',
     background: `url(${background})`,
     backgroundPosition: 'center',
@@ -16,26 +16,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(11, 0, 8),
     color: 'white',
   },
-  item: {
-    fontSize: '45px',
-  },
-  body: {
-    fontSize: '20px',
-  },
-  item2: {
-    padding: '30px',
-  },
-  logoImage: {
-    width: 250,
-    height: 250,
-  },
 }))
 
-export default function Jumbotro() {
+export default function Jumbotron() {
   const classes = useStyles()
 
   return (
-    <section className={classes.jumbotron}>
+    <section className={classes.root}>
       <Container>
         <JumbotronTimeline />
       </Container>

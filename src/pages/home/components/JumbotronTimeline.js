@@ -9,6 +9,8 @@ import {
   TimelineDot,
 } from '@material-ui/lab'
 
+import MuiLink from 'global/components/MuiLink'
+
 import { TIMELINES } from '../constants/timelines.const'
 import { primary } from 'assets/scss/variables/__colors.scss'
 
@@ -30,7 +32,7 @@ const JumbotronTimeline = () => {
   return (
     <>
       <Timeline align="right">
-        {TIMELINES.map(({ label, active, isLast }) => (
+        {TIMELINES.map(({ label, active, isLast, url }) => (
           <TimelineItem
             key={label}
             classes={{ root: classes.rootTimelineItem }}
@@ -40,7 +42,13 @@ const JumbotronTimeline = () => {
               {!isLast && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent className={active ? classes.active : ''}>
-              {label}
+              {url ? (
+                <MuiLink to={url} color="inherit" underline="none">
+                  {label}
+                </MuiLink>
+              ) : (
+                label
+              )}
             </TimelineContent>
           </TimelineItem>
         ))}
