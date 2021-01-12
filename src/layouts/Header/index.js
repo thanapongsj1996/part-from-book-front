@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useCallback, useState } from 'react'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { AppBar, Toolbar, Container, Switch, Tooltip } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -29,9 +30,19 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }))
-const Header = ({ darkMode, actions, ...props }) => {
+const Header = ({ darkMode, actions, location, ...props }) => {
   const [showHeader, setShowHeader] = useState(false)
   const classes = useStyles()
+
+  const handleScroll = useCallback(() => {
+    const { scrollY } = window
+
+    if (scrollY < 500 && showHeader) {
+      setShowHeader(false)
+    } else if (scrollY >= 500 && !showHeader) {
+      setShowHeader(true)
+    }
+  }, [showHeader])
 
   useEffect(() => {
     document.addEventListener('scroll', handleScroll)
@@ -41,18 +52,9 @@ const Header = ({ darkMode, actions, ...props }) => {
     }
   })
 
-  const handleScroll = () => {
-    const { scrollY } = window
-
-    if (scrollY < 500 && showHeader) {
-      setShowHeader(false)
-    } else if (scrollY >= 500 && !showHeader) {
-      setShowHeader(true)
-    }
-  }
-
   const appBarClasses = useMemo(() => {
     const classList = [classes.appBar]
+    const isHomePage = location.pathname === '/'
 
     if (darkMode) {
       classList.push(classes.appBarDark)
@@ -60,7 +62,7 @@ const Header = ({ darkMode, actions, ...props }) => {
       classList.push(classes.appBarDefault)
     }
 
-    if (!showHeader) {
+    if (!showHeader & isHomePage) {
       classList.push(classes.hide)
     }
 
@@ -71,6 +73,7 @@ const Header = ({ darkMode, actions, ...props }) => {
     classes.appBarDefault,
     classes.hide,
     darkMode,
+    location.pathname,
     showHeader,
   ])
 
@@ -106,4 +109,4 @@ const mapActions = { toggleDarkMode }
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
 
-export default connect(mapStates, mapActions, mergeProps)(Header)
+export default connect(mapStates, mapActions, mergeProps)(withRouter(Header))
