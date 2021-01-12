@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import JumbotronTimeline from './JumbotronTimeline'
 
-import background from 'assets/images/jumbotron-background.png'
+import background from 'assets/images/home/jumbotron-background.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     padding: theme.spacing(11, 0, 8),
+    marginBottom: theme.spacing(6),
     color: 'white',
   },
 }))
