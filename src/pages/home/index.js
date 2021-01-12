@@ -3,7 +3,7 @@ import React from 'react'
 import Jumbotron from './components/Jumbotron'
 import WebDetail from './components/WebDetail'
 
-export default function Content() {
+const Home = () => {
   return (
     <main>
       <Jumbotron />
@@ -12,3 +12,5 @@ export default function Content() {
     </main>
   )
 }
+
+export default Home
