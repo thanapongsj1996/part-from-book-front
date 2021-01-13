@@ -4,6 +4,7 @@ import { Container, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import HomeDescriptionCard from './HomeDescriptionCard'
+import SeparatorText from 'global/components/SeparatorText'
 
 import { DESCRIPTIONS } from '../constants/description.const'
 
@@ -86,6 +87,8 @@ const WebDetail = ({ darkMode, ...props }) => {
           </Grid>
         ))}
       </Grid>
+
+      <SeparatorText text="บทความล่าสุด" />
     </Container>
   )
 }
