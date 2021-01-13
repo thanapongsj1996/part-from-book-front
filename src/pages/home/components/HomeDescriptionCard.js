@@ -10,10 +10,14 @@ const logos = [LogoWriting, LogoBook, LogoTarget]
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(14, 3, 6),
+    padding: theme.spacing(12, 3, 6),
     position: 'relative',
     borderRadius: 10,
-    height: 160,
+    minHeight: 160,
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(3),
+      width: '80%',
+    },
   },
   img: {
     position: 'absolute',
@@ -50,7 +54,7 @@ const HomeDescriptionCard = ({ description }) => {
         style={{ width: description.logoWidth, height: description.logoHeight }}
       />
 
-      <Typography className={classes.title} variant="h6" component="h2">
+      <Typography className={classes.title} variant="h6" component="h3">
         {description.title}
       </Typography>
 

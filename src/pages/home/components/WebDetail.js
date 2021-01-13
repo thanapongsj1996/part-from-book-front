@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontSize: 18,
   },
+  descriptionCardWrapper: {
+    marginBottom: theme.spacing(10),
+  },
   descriptionCard: {
     textAlign: 'center',
   },
@@ -32,7 +35,7 @@ const WebDetail = ({ darkMode, ...props }) => {
   const classes = useStyles()
 
   return (
-    <Container className={classes.root}>
+    <Container>
       <Grid
         container
         className={classes.titleWrapper}
@@ -61,12 +64,19 @@ const WebDetail = ({ darkMode, ...props }) => {
         <b> “เรื่องเล่าจากหนังสือ”</b>
       </Typography>
 
-      <Grid container spacing={5} justify="center">
+      <Grid
+        container
+        className={classes.descriptionCardWrapper}
+        spacing={5}
+        justify="center"
+      >
         {DESCRIPTIONS.map((description) => (
           <Grid
             key={description.title}
             item
+            container
             className={classes.descriptionCard}
+            justify="center"
             sm={4}
           >
             <HomeDescriptionCard
