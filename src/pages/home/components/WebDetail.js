@@ -4,6 +4,7 @@ import { Container, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import HomeDescriptionCard from './HomeDescriptionCard'
+import ArticleCard from 'global/components/Article/ArticleCard'
 import SeparatorText from 'global/components/SeparatorText'
 
 import { DESCRIPTIONS } from '../constants/description.const'
@@ -68,7 +69,7 @@ const WebDetail = ({ darkMode, ...props }) => {
       <Grid
         container
         className={classes.descriptionCardWrapper}
-        spacing={5}
+        spacing={4}
         justify="center"
       >
         {DESCRIPTIONS.map((description) => (
@@ -88,7 +89,20 @@ const WebDetail = ({ darkMode, ...props }) => {
         ))}
       </Grid>
 
-      <SeparatorText text="บทความล่าสุด" />
+      <Container>
+        <SeparatorText text="บทความล่าสุด" />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <ArticleCard orientation="horizontal" />
+          </Grid>
+
+          {[0, 1, 2, 3].map((value) => (
+            <Grid key={value} item xs={3}>
+              <ArticleCard />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Container>
   )
 }
