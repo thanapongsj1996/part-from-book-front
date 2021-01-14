@@ -11,7 +11,7 @@ const SeparatorText = ({ text, darkMode }) => {
       root: {
         display: 'flex',
         alignItems: 'flex-end',
-        margin: '20px 0',
+        margin: '20px 0 60px',
         '&::before': {
           content: "''",
         },
