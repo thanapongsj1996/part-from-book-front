@@ -30,30 +30,25 @@ const JumbotronTimeline = () => {
   const classes = useStyles()
 
   return (
-    <>
-      <Timeline align="right">
-        {TIMELINES.map(({ label, active, isLast, url }) => (
-          <TimelineItem
-            key={label}
-            classes={{ root: classes.rootTimelineItem }}
-          >
-            <TimelineSeparator>
-              <TimelineDot color={active ? 'primary' : 'grey'} />
-              {!isLast && <TimelineConnector />}
-            </TimelineSeparator>
-            <TimelineContent className={active ? classes.active : ''}>
-              {url ? (
-                <MuiLink to={url} color="inherit" underline="none">
-                  {label}
-                </MuiLink>
-              ) : (
-                label
-              )}
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
-    </>
+    <Timeline align="right">
+      {TIMELINES.map(({ label, active, isLast, url }) => (
+        <TimelineItem key={label} classes={{ root: classes.rootTimelineItem }}>
+          <TimelineSeparator>
+            <TimelineDot color={active ? 'primary' : 'grey'} />
+            {!isLast && <TimelineConnector />}
+          </TimelineSeparator>
+          <TimelineContent className={active ? classes.active : ''}>
+            {url ? (
+              <MuiLink to={url} color="inherit" underline="none">
+                {label}
+              </MuiLink>
+            ) : (
+              label
+            )}
+          </TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
   )
 }
 

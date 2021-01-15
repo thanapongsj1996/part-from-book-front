@@ -8,6 +8,7 @@ import background from 'assets/images/home/jumbotron-background.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
     width: '100%',
     background: `url(${background})`,
     backgroundPosition: 'center',
@@ -17,6 +18,18 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(6),
     color: 'white',
   },
+  timeline: {
+    zIndex: 2,
+    position: 'relative',
+  },
+  overlay: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    zIndex: 1,
+    backgroundColor: 'rgb(0, 0, 0, 40%)',
+  },
 }))
 
 export default function Jumbotron() {
@@ -24,9 +37,10 @@ export default function Jumbotron() {
 
   return (
     <section className={classes.root}>
-      <Container>
+      <Container className={classes.timeline}>
         <JumbotronTimeline />
       </Container>
+      <div className={classes.overlay}></div>
     </section>
   )
 }
