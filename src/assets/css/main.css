@@ -3,4 +3,19 @@ body {
   margin: 0;
   font-family: 'Poppins', 'Prompt', sans-serif;
   scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 959px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  html,
+  body {
+    font-size: 20px;
+  }
 }

@@ -63,7 +63,7 @@ const ThemeOverride = ({ darkMode, children }) => {
         overrides: {
           MuiTimeline: {
             root: {
-              fontSize: 20,
+              fontSize: '1.25rem',
               fontWeight: 400,
               color: COLOR.grey1,
             },

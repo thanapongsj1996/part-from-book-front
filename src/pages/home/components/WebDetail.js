@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   subTitle: {
     marginBottom: theme.spacing(11),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: '1.125rem',
   },
   descriptionCardWrapper: {
     marginBottom: theme.spacing(10),

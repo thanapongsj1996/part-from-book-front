@@ -11,7 +11,7 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 
 const useStyles = makeStyles((theme) => ({
   navButton: {
-    fontSize: 18,
+    fontSize: '1.125rem',
     fontWeight: 400,
     margin: theme.spacing(0, 1),
   },
