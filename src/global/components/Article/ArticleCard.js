@@ -34,6 +34,7 @@ const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
       title: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
         fontWeight: verticalMode ? 500 : 600,
+        color: darkMode ? COLOR.white : COLOR.black,
       },
       description: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
