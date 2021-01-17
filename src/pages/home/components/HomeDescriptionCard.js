@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     minHeight: 160,
     [theme.breakpoints.down('xs')]: {
+      minHeight: 130,
       marginBottom: theme.spacing(3),
       width: '80%',
     },
