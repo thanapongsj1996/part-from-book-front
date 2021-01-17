@@ -29,31 +29,41 @@ const useStyles = makeStyles({
 const JumbotronTimeline = () => {
   const classes = useStyles()
 
+  const handleClickLink = (url) => {
+    const match = url.match(/^#((\w+-)*\w+)$/)
+    const id = match?.[1]
+    if (id) {
+      // document.getElementById(id).scrollIntoView()
+      const scrollY = document.getElementById(id).offsetTop - 80
+      window.scrollTo(0, scrollY)
+    }
+  }
+
   return (
-    <>
-      <Timeline align="right">
-        {TIMELINES.map(({ label, active, isLast, url }) => (
-          <TimelineItem
-            key={label}
-            classes={{ root: classes.rootTimelineItem }}
-          >
-            <TimelineSeparator>
-              <TimelineDot color={active ? 'primary' : 'grey'} />
-              {!isLast && <TimelineConnector />}
-            </TimelineSeparator>
-            <TimelineContent className={active ? classes.active : ''}>
-              {url ? (
-                <MuiLink to={url} color="inherit" underline="none">
-                  {label}
-                </MuiLink>
-              ) : (
-                label
-              )}
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
-    </>
+    <Timeline align="right">
+      {TIMELINES.map(({ label, active, isLast, url }) => (
+        <TimelineItem key={label} classes={{ root: classes.rootTimelineItem }}>
+          <TimelineSeparator>
+            <TimelineDot color={active ? 'primary' : 'grey'} />
+            {!isLast && <TimelineConnector />}
+          </TimelineSeparator>
+          <TimelineContent className={active ? classes.active : ''}>
+            {url ? (
+              <MuiLink
+                to={url}
+                color="inherit"
+                underline="none"
+                onClick={() => handleClickLink(url)}
+              >
+                {label}
+              </MuiLink>
+            ) : (
+              label
+            )}
+          </TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
   )
 }
 
