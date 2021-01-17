@@ -33,8 +33,8 @@ const JumbotronTimeline = () => {
     const match = url.match(/^#((\w+-)*\w+)$/)
     const id = match?.[1]
     if (id) {
-      // document.getElementById(id).scrollIntoView()
-      const scrollY = document.getElementById(id).offsetTop - 80
+      const element = document.getElementById(id)
+      const scrollY = element.offsetTop - 80
       window.scrollTo(0, scrollY)
     }
   }

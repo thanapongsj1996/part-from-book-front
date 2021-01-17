@@ -89,7 +89,7 @@ const WebDetail = ({ darkMode, ...props }) => {
         ))}
       </Grid>
 
-      <Container>
+      <Container id="recently-article">
         <SeparatorText text="บทความล่าสุด" />
         <Grid container spacing={2}>
           <Grid item xs={12}>
