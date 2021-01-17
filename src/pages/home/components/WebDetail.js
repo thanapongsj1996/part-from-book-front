@@ -93,12 +93,12 @@ const WebDetail = ({ darkMode, ...props }) => {
         <SeparatorText text="บทความล่าสุด" />
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <ArticleCard orientation="horizontal" />
+            <ArticleCard darkMode={darkMode} orientation="horizontal" />
           </Grid>
 
           {[0, 1, 2, 3].map((value) => (
-            <Grid key={value} item xs={3}>
-              <ArticleCard />
+            <Grid key={value} item xs={12} sm={6} md={3}>
+              <ArticleCard darkMode={darkMode} />
             </Grid>
           ))}
         </Grid>

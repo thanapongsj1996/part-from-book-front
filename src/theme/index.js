@@ -30,6 +30,9 @@ const ThemeOverride = ({ darkMode, children }) => {
           secondary: {
             main: '#BDC3C7',
           },
+          background: {
+            paper: darkMode ? COLOR.dark2 : COLOR.white,
+          },
         },
         typography: {
           fontFamily: "'Poppins', 'Prompt', sans-serif !important",
