@@ -14,7 +14,6 @@ import CategoryList from './components/CategoryList'
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: 'center',
-    fontFamily: 'Prompt',
     margin: theme.spacing(3, 0, 4, 0),
   },
   content: {
