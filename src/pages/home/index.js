@@ -8,7 +8,7 @@ const Home = () => {
     <main>
       <Jumbotron />
       <WebDetail />
-      <div style={{ height: 2000 }}></div>
+      <div style={{ height: 500 }}></div>
     </main>
   )
 }
