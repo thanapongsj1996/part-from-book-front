@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 0px 4px -1px rgba(0,0,0,0.75)',
   },
   writerName: {
-    fontSize: 18,
+    fontSize: '1.125rem',
   },
   title: {
     color: theme.palette.text.primary,
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     color: theme.palette.text.primary,
-    fontSize: 18,
+    fontSize: '1.125rem',
   },
 }))
 

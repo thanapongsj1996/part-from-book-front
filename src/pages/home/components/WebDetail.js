@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   subTitle: {
     marginBottom: theme.spacing(11),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: '1.125rem',
   },
   descriptionCardWrapper: {
     marginBottom: theme.spacing(10),
@@ -89,7 +89,7 @@ const WebDetail = ({ darkMode, ...props }) => {
         ))}
       </Grid>
 
-      <Container>
+      <Container id="recently-article">
         <SeparatorText text="บทความล่าสุด" />
         <Grid container spacing={2}>
           <Grid item xs={12}>

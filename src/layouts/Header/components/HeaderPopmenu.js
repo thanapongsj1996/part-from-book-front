@@ -19,13 +19,13 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 const useStyles = makeStyles((theme) => ({
   navButtonPopover: {
     width: '100%',
-    fontSize: 18,
+    fontSize: '1.125rem',
     fontWeight: 400,
     color: theme.palette.text.primary,
   },
   navButtonPopoverProfile: {
     width: '100%',
-    fontSize: 15,
+    fontSize: '0.9375rem',
     fontWeight: 400,
     paddingRight: 20,
     color: theme.palette.text.primary,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userIconPopoverProfile: {
     color: '#95A5A6',
-    fontSize: 80,
+    fontSize: '5rem',
   },
   popoverProfile: {
     padding: 12,
@@ -48,14 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
   userIconPopover: {
     color: '#95A5A6',
-    fontSize: 100,
+    fontSize: '6.25rem',
   },
   userNamePopover: {
     textAlign: 'center',
     marginTop: '-14px',
   },
   profileHeader: {
-    fontSize: 18,
+    fontSize: '1.125rem',
   },
   textCenter: {
     textAlign: 'center',

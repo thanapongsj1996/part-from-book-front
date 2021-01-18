@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { AppBar, Toolbar, Container, Switch, Tooltip } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import HeaderLogo from './components/HeaderLogo'
+import Logo from 'global/components/Logo'
 import HeaderNavbar from './components/HeaderNavbar'
 import { toggleDarkMode } from 'actions/app.action'
 
@@ -81,7 +81,7 @@ const Header = ({ darkMode, actions, location, ...props }) => {
     <AppBar className={appBarClasses} position="fixed">
       <Container>
         <Toolbar>
-          <HeaderLogo darkMode={darkMode} />
+          <Logo darkMode={darkMode} HideLabel />
 
           <div className={classes.spacer} />
 

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 0px 4px -2px rgba(0,0,0,0.75)',
   },
   writerName: {
-    fontSize: 15,
+    fontSize: '0.9375rem',
   },
   title: {
     margin: theme.spacing(1, 0),

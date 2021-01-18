@@ -6,6 +6,7 @@ import { useMediaQuery } from '@material-ui/core'
 // Components
 import ThemeOverride from './theme'
 import Header from './layouts/Header'
+import Footer from './layouts/Footer'
 import Routes from './routes'
 
 // Constants
@@ -43,6 +44,8 @@ const App = ({ appState, actions, ...props }) => {
         <Header />
 
         <Routes />
+
+        <Footer />
       </ThemeOverride>
     </Router>
   )

@@ -26,7 +26,7 @@ const SeparatorText = ({ text, darkMode }) => {
         },
       },
       text: {
-        fontSize: 30,
+        fontSize: '1.875rem',
         fontWeight: 600,
       },
     })),
