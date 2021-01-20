@@ -9,11 +9,18 @@ import {
 } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
+import utils from 'utils'
+
 import { ARTICLE } from 'global/constants/article.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
 
 // orientation = [horizontal, vertical]
-const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
+const ArticleCard = ({
+  orientation = 'vertical',
+  darkMode,
+  article,
+  ...props
+}) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   const verticalMode = orientation === 'vertical' || isMobile
@@ -70,8 +77,7 @@ const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
   }, [classes.hideBorder, classes.root, verticalMode])
 
   const shortTitle = () => {
-    const title =
-      'Nunc enim eget venenatis eget congue. Arcu suspendisse aliquam id potenti vel ac.'
+    const title = article.title
     const n = title.length
     const max = ARTICLE.CARD.MAX_TITLE_LENGTH
 
@@ -83,11 +89,7 @@ const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
   }
 
   const shortDescription = () => {
-    const description = `Tortor faucibus eu aliquam aenean lectus vitae. Facilisis faucibus
-    posuere sit eget purus enim. Mattis ullamcorper ut id neque at
-    tempus, nunc arcu nulla. Neque in nullam ut urna quam enim.
-    Ultricies tincidunt tortor placerat convallis aliquam nec aliquam
-    tempor. Tellus rhoncus egestas tempor erat.`
+    const description = article.body
     const n = description.length
     let max = ARTICLE.CARD.MAX_DESC_LENGTH
     if (!verticalMode) {
@@ -97,12 +99,17 @@ const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
     return n < max ? description : description.substr(0, max).trim() + '...'
   }
 
+  const writerName = useMemo(() => {
+    const { fname, lname } = article.writer
+    return `${fname} ${lname}`
+  }, [article])
+
   return (
     <Card component={Paper} className={cardClass}>
       <CardMedia
         className={verticalMode ? classes.cover : classes.coverLandscape}
-        image="https://media.npr.org/assets/img/2018/12/11/gettyimages-865109088-d7e6d2829aece07208cc5c2fde95846b0e802565-s800-c85.jpg"
-        title="Live from space album cover"
+        image={article.photo}
+        title={article.title}
       />
 
       <CardContent>
@@ -124,10 +131,13 @@ const ArticleCard = ({ orientation = 'vertical', darkMode, ...props }) => {
         <Typography className={classes.info} variant={typographys.info}>
           {verticalMode ? (
             <span>
-              Cameron Williamson <br /> 17 ธ.ค. 2563
+              {writerName} <br /> {utils.timeConverted(article.updatedAt)}
             </span>
           ) : (
-            <span>Cameron Williamson &nbsp; &#8226; &nbsp; 17 ธ.ค. 2563</span>
+            <span>
+              {writerName} &nbsp; &#8226; &nbsp;
+              {utils.timeConverted(article.updatedAt)}
+            </span>
           )}
         </Typography>
       </CardContent>

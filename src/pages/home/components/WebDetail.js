@@ -4,8 +4,7 @@ import { Container, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import HomeDescriptionCard from './HomeDescriptionCard'
-import ArticleCard from 'global/components/Article/ArticleCard'
-import SeparatorText from 'global/components/SeparatorText'
+import HomeRecentlyArticle from './HomeRecentlyArticle'
 
 import { DESCRIPTIONS } from '../constants/description.const'
 
@@ -89,20 +88,7 @@ const WebDetail = ({ darkMode, ...props }) => {
         ))}
       </Grid>
 
-      <Container id="recently-article">
-        <SeparatorText text="บทความล่าสุด" />
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <ArticleCard darkMode={darkMode} orientation="horizontal" />
-          </Grid>
-
-          {[0, 1, 2, 3].map((value) => (
-            <Grid key={value} item xs={12} sm={6} md={3}>
-              <ArticleCard darkMode={darkMode} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <HomeRecentlyArticle />
     </Container>
   )
 }
