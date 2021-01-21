@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 250,
     backgroundColor: COLOR.primary,
     color: COLOR.white,
+    marginTop: theme.spacing(8),
   },
   menuWrapper: {
     height: '100%',
