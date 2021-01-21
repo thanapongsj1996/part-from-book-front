@@ -81,7 +81,7 @@ const Header = ({ darkMode, actions, location, ...props }) => {
     <AppBar className={appBarClasses} position="fixed">
       <Container>
         <Toolbar>
-          <Logo darkMode={darkMode} HideLabel />
+          <Logo darkMode={darkMode} hideLabel />
 
           <div className={classes.spacer} />
 
