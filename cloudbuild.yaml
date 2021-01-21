@@ -1,20 +1,21 @@
 steps:
-  # build the container image
+  # Create .env on production
   - name: node:10.15.1
     entrypoint: npm
     args: ['run', 'create-env']
     env:
       - 'REACT_APP_API_URL=${_REACT_APP_API_URL}'
 
+  # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     timeout: 1200s
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/part-from-book-front', '.']
 
-    # push the container image to Container Registry
+  # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/part-from-book-front']
 
-    # Deploy container image to Cloud Run
+  # Deploy container image to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     timeout: 1200s
     args:
@@ -35,5 +36,6 @@ steps:
 timeout: 1200s
 images:
   - gcr.io/$PROJECT_ID/part-from-book-front
+# Command in Terminal
 # gcloud builds submit --project "part-from-book" --config=./cloudbuild.yaml
 # gcloud beta run deploy part-from-book-front --region asia-northeast1 --project "part-from-book" --image gcr.io/part-from-book/part-from-book-front --platform managed
