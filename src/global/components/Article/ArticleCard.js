@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
+import { connect } from 'react-redux'
 import {
   Paper,
   Card,
@@ -29,6 +30,7 @@ const ArticleCard = ({
     desciption: verticalMode ? 'body2' : 'body1',
     info: verticalMode ? 'caption' : 'body2',
   }
+
   const useStyles = useCallback(
     makeStyles((theme) => ({
       root: {
@@ -145,4 +147,11 @@ const ArticleCard = ({
   )
 }
 
-export default ArticleCard
+const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+
+const mapActions = {}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(ArticleCard)

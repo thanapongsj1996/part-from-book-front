@@ -26,17 +26,13 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {articles[0] && (
-            <ArticleCard
-              article={articles[0]}
-              darkMode={darkMode}
-              orientation="horizontal"
-            />
+            <ArticleCard article={articles[0]} orientation="horizontal" />
           )}
         </Grid>
 
         {articles.slice(1).map((article) => (
           <Grid key={article._id} item xs={12} sm={6} md={3}>
-            <ArticleCard article={article} darkMode={darkMode} />
+            <ArticleCard article={article} />
           </Grid>
         ))}
       </Grid>
