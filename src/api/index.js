@@ -1,6 +1,6 @@
 const VERSION = '/v1'
 const API_PREFIX = `api${VERSION}`
-const API_ENDPOINT = process.env._REACT_APP_API_URL || 'http://localhost:8080'
+const API_ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:8080'
 
 class API {}
 
