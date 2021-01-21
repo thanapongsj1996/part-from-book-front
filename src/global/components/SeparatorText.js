@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import COLOR from 'assets/scss/variables/__colors.scss'
 
-const SeparatorText = ({ text, darkMode }) => {
+const SeparatorText = ({ text, size = 1.875, darkMode }) => {
   const useStyle = useCallback(
     makeStyles((theme) => ({
       root: {
@@ -26,7 +26,7 @@ const SeparatorText = ({ text, darkMode }) => {
         },
       },
       text: {
-        fontSize: '1.875rem',
+        fontSize: `${size}rem`,
         fontWeight: 600,
       },
     })),
