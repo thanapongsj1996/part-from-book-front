@@ -41,11 +41,18 @@ export default function ProductItem(props) {
 
   const navigateToDetail = () => history.push(`/articles/${_id}`)
 
+  const UserAvatar = () => {
+    if (writerPhoto.search('nopic') !== -1) {
+      return <Avatar aria-label="recipe">{fname[0]}</Avatar>
+    }
+    return <Avatar src={writerPhoto} />
+  }
+
   return (
     <Grid item xs={12} sm={9} md={6} lg={4}>
       <Card className={classes.card}>
         <CardHeader
-          avatar={<Avatar src={writerPhoto} />}
+          avatar={<UserAvatar />}
           title={`${fname} ${lname}`}
           subheader={utils.timeConverted(updatedAt)}
           classes={{ title: classes.writerName }}
