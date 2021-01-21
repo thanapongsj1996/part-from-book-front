@@ -3,8 +3,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     timeout: 1200s
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/part-from-book-front', '.']
-    env:
-      - 'REACT_APP_API_URL=https://part-from-book-api-j4vlqdhg7q-an.a.run.app'
 
     # push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -27,6 +25,8 @@ steps:
         'managed',
         '--quiet',
       ]
+    env:
+      - 'REACT_APP_API_URL=https://part-from-book-api-j4vlqdhg7q-an.a.run.app'
 
 timeout: 1200s
 images:
