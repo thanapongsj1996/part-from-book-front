@@ -1,4 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
 import {
   Paper,
   Card,
@@ -21,22 +23,29 @@ const ArticleCard = ({
   article,
   ...props
 }) => {
+  const history = useHistory()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   const verticalMode = orientation === 'vertical' || isMobile
+  const isHomeRoute = useMemo(() => history.location.pathname === '/', [
+    history.location.pathname,
+  ])
+
   const typographys = {
     title: verticalMode ? 'body1' : 'h6',
     desciption: verticalMode ? 'body2' : 'body1',
     info: verticalMode ? 'caption' : 'body2',
   }
+
   const useStyles = useCallback(
     makeStyles((theme) => ({
       root: {
         display: 'flex',
         flexDirection: verticalMode ? 'column' : 'row',
-        backgroundColor: verticalMode
-          ? 'transparent'
-          : theme.palette.background.paper,
+        backgroundColor:
+          verticalMode && isHomeRoute
+            ? 'transparent'
+            : theme.palette.background.paper,
       },
       title: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
@@ -48,7 +57,6 @@ const ArticleCard = ({
       },
       cover: {
         height: 200,
-        borderRadius: 4,
       },
       coverLandscape: {
         minWidth: 250,
@@ -68,7 +76,7 @@ const ArticleCard = ({
   const classes = useStyles()
 
   const cardClass = useMemo(() => {
-    const className = [classes.root]
+    const className = [classes.root, 'cursor-pointer']
     if (verticalMode) {
       className.push(classes.hideBorder)
     }
@@ -104,8 +112,14 @@ const ArticleCard = ({
     return `${fname} ${lname}`
   }, [article])
 
+  const openArticleDetailPage = () => history.push(`/articles/${article._id}`)
+
   return (
-    <Card component={Paper} className={cardClass}>
+    <Card
+      component={Paper}
+      className={cardClass}
+      onClick={openArticleDetailPage}
+    >
       <CardMedia
         className={verticalMode ? classes.cover : classes.coverLandscape}
         image={article.photo}
@@ -145,4 +159,11 @@ const ArticleCard = ({
   )
 }
 
-export default ArticleCard
+const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+
+const mapActions = {}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(ArticleCard)

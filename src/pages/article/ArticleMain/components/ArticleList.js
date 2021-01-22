@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
 import Api from 'api'
-import ArticleItem from './ArticleItem'
+import ArticleCard from 'global/components/Article/ArticleCard'
 
 const useStyles = makeStyles((theme) => ({
   article: {
@@ -41,9 +41,11 @@ export default function AricleList() {
           <CircularProgress color="secondary" />
         </div>
       ) : (
-        <Grid container justify="center" spacing={3}>
+        <Grid container spacing={3}>
           {articles.map((article) => (
-            <ArticleItem key={article._id} {...article} />
+            <Grid key={article._id} item xs={12} sm={6} md={3}>
+              <ArticleCard key={article._id} article={article} />
+            </Grid>
           ))}
         </Grid>
       )}
