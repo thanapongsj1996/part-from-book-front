@@ -6,6 +6,10 @@ body {
   font-size: 16px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 959px) {
   html,
   body {
