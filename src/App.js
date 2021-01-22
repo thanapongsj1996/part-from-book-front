@@ -8,6 +8,7 @@ import ThemeOverride from './theme'
 import Header from './layouts/Header'
 import Footer from './layouts/Footer'
 import Routes from './routes'
+import ScrollToTop from './global/components/ScrollToTop'
 
 // Constants
 import { LOCAL_STORAGE } from './global/constants/storage.const'
@@ -40,6 +41,7 @@ const App = ({ appState, actions, ...props }) => {
 
   return (
     <Router>
+      <ScrollToTop />
       <ThemeOverride darkMode={appState.darkMode}>
         <Header />
 
