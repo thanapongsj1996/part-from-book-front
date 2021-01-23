@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     '&> div': {
       padding: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: 20,
       '&> div': {
         padding: theme.spacing(2),
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '&> p': {
       margin: 0,
+      fontSize: '1rem',
       '&:not(:last-of-type)': {
         margin: '0 0 0.5rem',
       },
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const Footer = ({ ...props }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <section className={classes.root}>
@@ -55,15 +56,17 @@ const Footer = ({ ...props }) => {
           className={classes.menuWrapper}
           justify={isMobile ? 'center' : 'flex-start'}
         >
-          <Grid item>
-            <Logo darkMode />
+          <Grid item xs={12} sm={12} md="auto">
+            <Grid container justify={isMobile ? 'center' : 'flex-start'}>
+              <Logo darkMode />
+            </Grid>
           </Grid>
 
           <Grid item>
             <Grid
               container
               justify={isMobile ? 'center' : 'flex-start'}
-              spacing={6}
+              spacing={isMobile ? 3 : 6}
             >
               <Grid item className={classes.menu}>
                 <h4>เว็บไซต์</h4>
