@@ -11,7 +11,6 @@ httpClient.interceptors.request.use(async (config) => {
 httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error(error)
     const { response } = error
     return Promise.reject(response)
   }

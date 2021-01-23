@@ -8,7 +8,7 @@ import SeparatorText from 'global/components/SeparatorText'
 import { fetchArticles } from 'actions/article.action'
 
 const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
-  const [articles, SetArticles] = useState([])
+  const [articles, setArticles] = useState([])
 
   useEffect(() => {
     fetchData()
@@ -16,8 +16,12 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
   }, [])
 
   const fetchData = async () => {
-    const res = await actions.fetchArticles(1, 5)
-    SetArticles(res.data)
+    try {
+      const res = await actions.fetchArticles(1, 5)
+      setArticles(res.data)
+    } catch (e) {
+      console.error(e.message)
+    }
   }
 
   return (
