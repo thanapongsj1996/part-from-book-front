@@ -6,7 +6,7 @@ import { useMediaQuery } from '@material-ui/core'
 // Components
 import ThemeOverride from './theme'
 import Header from './layouts/Header'
-import Footer from './layouts/Footer'
+// import Footer from './layouts/Footer'
 import Routes from './routes'
 import ScrollToTop from './global/components/ScrollToTop'
 
@@ -47,7 +47,7 @@ const App = ({ appState, actions, ...props }) => {
 
         <Routes />
 
-        <Footer />
+        {/* <Footer /> */}
       </ThemeOverride>
     </Router>
   )
