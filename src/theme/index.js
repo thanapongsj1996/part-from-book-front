@@ -35,7 +35,7 @@ const ThemeOverride = ({ darkMode, children }) => {
           },
         },
         typography: {
-          fontFamily: "'Poppins', 'Prompt', sans-serif !important",
+          fontFamily: "'NotoSans', 'Poppins', 'Prompt', sans-serif !important",
           fontWeightBold: 600,
           h1: {
             color: getTitleTextColor,

@@ -1,7 +1,35 @@
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSans/NotoSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSans/NotoSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSans/NotoSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSans/NotoSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0;
-  font-family: 'Poppins', 'Prompt', sans-serif;
+  font-family: 'NotoSans', 'Poppins', 'Prompt', sans-serif;
   scroll-behavior: smooth;
   font-size: 16px;
 }
