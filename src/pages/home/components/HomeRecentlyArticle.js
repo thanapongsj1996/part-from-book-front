@@ -17,7 +17,7 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
 
   const fetchData = async () => {
     try {
-      const res = await actions.fetchArticles(1, 5)
+      const res = await actions.fetchArticles(1, 4)
       setArticles(res.data)
     } catch (e) {
       console.error(e.message)
@@ -35,7 +35,7 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
         </Grid>
 
         {articles.slice(1).map((article) => (
-          <Grid key={article._id} item xs={12} sm={6} md={3}>
+          <Grid key={article._id} item xs={12} sm={6} md={4}>
             <ArticleCard article={article} />
           </Grid>
         ))}
