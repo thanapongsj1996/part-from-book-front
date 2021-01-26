@@ -16,10 +16,7 @@ export const responseHandle = async (dispatch, request) => {
 }
 
 export const errorHandle = (dispatch, error) => {
-  const { statusText, status, data } = error
+  const { statusText, status } = error
 
-  console.error(status, statusText)
-  console.error(data)
-
-  throw data
+  throw new Error(`${status} ${statusText}`)
 }

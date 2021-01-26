@@ -10,6 +10,8 @@ import { toggleDarkMode } from 'actions/app.action'
 
 import COLOR from 'assets/scss/variables/__colors.scss'
 
+const hideList = ['/login', '/register']
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
@@ -55,6 +57,7 @@ const Header = ({ darkMode, actions, location, ...props }) => {
   const appBarClasses = useMemo(() => {
     const classList = [classes.appBar]
     const isHomePage = location.pathname === '/'
+    const hideHeader = hideList.includes(location.pathname)
 
     if (darkMode) {
       classList.push(classes.appBarDark)
@@ -62,7 +65,7 @@ const Header = ({ darkMode, actions, location, ...props }) => {
       classList.push(classes.appBarDefault)
     }
 
-    if (!showHeader & isHomePage) {
+    if (hideHeader || (!showHeader && isHomePage)) {
       classList.push(classes.hide)
     }
 

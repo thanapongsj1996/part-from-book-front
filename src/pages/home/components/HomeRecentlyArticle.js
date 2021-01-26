@@ -8,7 +8,7 @@ import SeparatorText from 'global/components/SeparatorText'
 import { fetchArticles } from 'actions/article.action'
 
 const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
-  const [articles, SetArticles] = useState([])
+  const [articles, setArticles] = useState([])
 
   useEffect(() => {
     fetchData()
@@ -16,8 +16,12 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
   }, [])
 
   const fetchData = async () => {
-    const res = await actions.fetchArticles(1, 5)
-    SetArticles(res.data)
+    try {
+      const res = await actions.fetchArticles(1, 4)
+      setArticles(res.data)
+    } catch (e) {
+      console.error(e.message)
+    }
   }
 
   return (
@@ -31,7 +35,7 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
         </Grid>
 
         {articles.slice(1).map((article) => (
-          <Grid key={article._id} item xs={12} sm={6} md={3}>
+          <Grid key={article._id} item xs={12} sm={6} md={4}>
             <ArticleCard article={article} />
           </Grid>
         ))}
