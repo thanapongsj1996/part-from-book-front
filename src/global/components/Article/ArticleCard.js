@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
+  Grid,
   Paper,
   Card,
   CardContent,
@@ -10,6 +11,8 @@ import {
   useMediaQuery,
 } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+
+import UserAvatar from 'global/components/User/UserAvatar'
 
 import utils from 'utils'
 
@@ -63,6 +66,9 @@ const ArticleCard = ({
         [theme.breakpoints.down('sm')]: {
           minWidth: 150,
         },
+      },
+      infoWrapper: {
+        marginTop: theme.spacing(2),
       },
       info: {
         color: darkMode ? COLOR.grey3 : COLOR.grey2,
@@ -142,18 +148,33 @@ const ArticleCard = ({
           {shortDescription()}
         </Typography>
 
-        <Typography className={classes.info} variant={typographys.info}>
-          {verticalMode ? (
-            <span>
-              {writerName} <br /> {utils.timeConverted(article.updatedAt)}
-            </span>
-          ) : (
-            <span>
-              {writerName} &nbsp; &#8226; &nbsp;
-              {utils.timeConverted(article.updatedAt)}
-            </span>
-          )}
-        </Typography>
+        <Grid
+          container
+          className={classes.infoWrapper}
+          alignItems="center"
+          spacing={2}
+        >
+          <Grid item>
+            <UserAvatar
+              photo={article?.writer?.photo}
+              name={article.writer.fname}
+            />
+          </Grid>
+          <Grid item>
+            <Typography className={classes.info} variant={typographys.info}>
+              {verticalMode ? (
+                <span>
+                  {writerName} <br /> {utils.timeConverted(article.updatedAt)}
+                </span>
+              ) : (
+                <span>
+                  {writerName} &nbsp; &#8226; &nbsp;
+                  {utils.timeConverted(article.updatedAt)}
+                </span>
+              )}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   )
