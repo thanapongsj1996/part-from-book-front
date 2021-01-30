@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
 import {
   Button,
@@ -18,11 +18,19 @@ import MuiLink from 'global/components/MuiLink'
 
 import { toggleDarkMode } from 'actions/app.action'
 
+import COLOR from 'assets/scss/variables/__colors.scss'
+
 const useStyles = makeStyles((theme) => ({
   button: {
     fontSize: '1.125rem',
     fontWeight: 400,
     margin: theme.spacing(0, 1),
+  },
+  buttonFont: {
+    color: COLOR.black,
+  },
+  buttonDarkFont: {
+    color: COLOR.grey3,
   },
   popper: {
     zIndex: theme.zIndex.drawer + 1,
@@ -59,9 +67,20 @@ const HeaderPopmenu = ({ darkMode, showHeader, actions, ...props }) => {
     }
   }
 
+  const buttonClasses = useMemo(() => {
+    const classList = [classes.button]
+    if (darkMode) {
+      classList.push(classes.buttonDarkFont)
+    } else {
+      classList.push(classes.buttonFont)
+    }
+
+    return classList.join(' ')
+  }, [classes.button, classes.buttonDarkFont, classes.buttonFont, darkMode])
+
   return (
     <>
-      <Button className={classes.button} onClick={toggleOpenSubMenu}>
+      <Button className={buttonClasses} onClick={toggleOpenSubMenu}>
         ตั้งค่า
       </Button>
 
