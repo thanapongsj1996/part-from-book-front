@@ -37,8 +37,10 @@ const AricleList = ({ actions, ...props }) => {
       const perPage = isMobile
         ? ARTICLE.PER_PAGE.MOBILE
         : ARTICLE.PER_PAGE.DESKTOP
-      const res = await actions.fetchArticles(1, perPage)
-      setArticles(res.data)
+      const {
+        data: { articles },
+      } = await actions.fetchArticles(1, perPage)
+      setArticles(articles)
     } catch (e) {
       console.error(e.message)
     } finally {
