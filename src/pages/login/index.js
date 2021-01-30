@@ -19,8 +19,9 @@ const validationSchema = yup.object({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100vw',
-    height: '100vh',
+    position: 'relative',
+    maxWidth: '100vw',
+    minHeight: '100vh',
   },
   background: {
     background: `url(${background}) center/cover no-repeat`,
@@ -29,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
     background: `url(${darkBackground}) center/cover no-repeat`,
   },
   container: {
-    paddingTop: theme.spacing(6),
+    padding: '48px 0 24px',
+    height: '100%',
     [theme.breakpoints.down('xs')]: {
+      position: 'absolute',
       padding: 0,
-      height: '100%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
