@@ -16,7 +16,7 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 520,
+    maxWidth: 500,
     padding: `40px 16px`,
     background: 'rgba(229, 229, 229, 0.94)',
     borderRadius: theme.spacing(1),
@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     paddingLeft: 0,
     paddingRight: 0,
-  },
-  contentWrapper: {
-    margin: '-8px 0',
   },
   logoWrapper: {
     marginBottom: theme.spacing(3),
@@ -37,21 +34,27 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     marginBottom: theme.spacing(3),
   },
-  inputWrapper: {
-    width: '80%',
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-    },
+  form: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   input: {
-    width: '100%',
-    background: 'rgba(249, 249, 249, 0.8)',
-    border: `1px solid ${COLOR.grey3}`,
+    width: '80%',
+    paddingBottom: theme.spacing(1),
     borderRadius: 3,
+    '& > .MuiInputBase-root': {
+      background: 'rgba(249, 249, 249, 0.8)',
+      border: `1px solid ${COLOR.grey3}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '90%',
+    },
   },
   submitBtn: {
     width: 150,
-    marginTop: theme.spacing(3),
+    margin: '16px 0',
     fontSize: '1rem',
   },
   link: {
@@ -60,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const LoginCard = () => {
+const LoginCard = ({ formik }) => {
   const classes = useStyles()
 
   return (
@@ -70,34 +73,50 @@ const LoginCard = () => {
           container
           className={classes.contentWrapper}
           justify="center"
-          xs={12}
           spacing={2}
         >
           <Grid item className={'prevent-click ' + classes.logoWrapper}>
             <Logo size={1.625} />
           </Grid>
 
-          <Grid item className={classes.descriptionWrapper} xs={12}>
+          <Grid item xs={12}>
             <Typography className={classes.description} variant="body1">
               เข้าสู่ระบบเพื่ออ่านและแบ่งปันเรื่องราวต่าง ๆ
               ในเรื่องเล่าจากหนังสือ
             </Typography>
           </Grid>
 
-          <Grid item className={classes.inputWrapper}>
+          <form className={classes.form} onSubmit={formik.handleSubmit}>
             <TextField
               className={classes.input}
               variant="outlined"
+              name="username"
               placeholder="อีเมล"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
             />
-          </Grid>
-          <Grid item className={classes.inputWrapper}>
             <TextField
               className={classes.input}
               variant="outlined"
+              name="password"
               placeholder="รหัสผ่าน"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
             />
-          </Grid>
+            <Button
+              className={classes.submitBtn}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              เข้าสู่ระบบ
+            </Button>
+          </form>
 
           <Grid
             item
@@ -107,16 +126,6 @@ const LoginCard = () => {
             xs={12}
             spacing={3}
           >
-            <Grid item>
-              <Button
-                className={classes.submitBtn}
-                variant="contained"
-                color="primary"
-              >
-                เข้าสู่ระบบ
-              </Button>
-            </Grid>
-
             <Grid item>
               <MuiLink
                 to="/forget-password"
