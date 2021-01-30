@@ -11,8 +11,10 @@ import background from 'assets/images/login/login-background.png'
 import darkBackground from 'assets/images/login/login-dark-background.png'
 
 const validationSchema = yup.object({
-  username: yup.string('Enter your username').required('Username is required'),
-  password: yup.string('Enter your password').required('Password is required'),
+  email: yup.string('กรุณาระบุอีเมลของคุณ').required('กรุณาระบุอีเมลของคุณ'),
+  password: yup
+    .string('กรุณาระบุรหัสผ่านของคุณ')
+    .required('กรุณาระบุรหัสผ่านของคุณ'),
 })
 
 const useStyles = makeStyles((theme) => ({
@@ -41,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ darkMode, ...props }) => {
   const classes = useStyles()
   const formik = useFormik({
-    initialValues: { username: '', password: '' },
+    initialValues: { email: '', password: '' },
     validationSchema: validationSchema,
     onSubmit: (values) => submit(values),
   })
 
   const submit = (values) => {
-    console.log('Submit username:', values.username)
+    console.log('Submit email:', values.email)
   }
 
   const rootClasses = useMemo(() => {

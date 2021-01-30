@@ -136,12 +136,12 @@ const LoginCard = ({ darkMode, formik }) => {
             <TextField
               className={inputClasses}
               variant="outlined"
-              name="username"
+              name="email"
               placeholder="อีเมล"
-              value={formik.values.username}
+              value={formik.values.email}
               onChange={formik.handleChange}
-              error={formik.touched.username && Boolean(formik.errors.username)}
-              helperText={formik.touched.username && formik.errors.username}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
             />
             <TextField
               className={inputClasses}
