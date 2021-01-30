@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Button } from '@material-ui/core'
@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 // import { Menu } from '@material-ui/icons'
 
 // import HeaderPopMenu from './HeaderPopmenu'
-import { NAV_LIST } from '../constants/header-nav-list.const'
+import { NAV_LIST } from '../constants/header-menu.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -82,17 +82,20 @@ const HeaderNavbar = ({ darkMode, location }) => {
     ]
   )
 
+  const availableNavs = useMemo(
+    () => NAV_LIST.filter(({ requiredLogin }) => !requiredLogin),
+    []
+  )
+
   return (
     <>
       {/* <Hidden only={['xs']}> */}
-      {NAV_LIST.map((menu) => (
+      {availableNavs.map((menu) => (
         <Button
           key={menu.title}
           component={RouterLink}
           to={menu.url}
           className={getNavClass(menu.url)}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
         >
           {menu.title}
         </Button>
