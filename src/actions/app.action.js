@@ -14,6 +14,11 @@ const ACTION_SET_DARK_MODE = (payload) => ({
   payload,
 })
 
+const ACTION_SET_SHOW_HEADER = (payload) => ({
+  type: APP_CASE.SET_SHOW_HEADER,
+  payload,
+})
+
 // Functions
 export const toggleDarkMode = () => {
   return (dispatch) => dispatch(ACTION_TOGGLE_DARK_MODE())
@@ -21,4 +26,8 @@ export const toggleDarkMode = () => {
 
 export const setDarkMode = (darkMode) => {
   return (dispatch) => dispatch(ACTION_SET_DARK_MODE(darkMode))
+}
+
+export const setShowHeader = (show) => {
+  return (dispatch) => dispatch(ACTION_SET_SHOW_HEADER(show))
 }

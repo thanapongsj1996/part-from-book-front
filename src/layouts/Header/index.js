@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useState } from 'react'
+import React, { useEffect, useMemo, useCallback } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { AppBar, Toolbar, Container } from '@material-ui/core'
@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Logo from 'global/components/Logo'
 import HeaderNavbar from './components/HeaderNavbar'
+
+import { setShowHeader } from 'actions/app.action'
 
 import COLOR from 'assets/scss/variables/__colors.scss'
 
@@ -31,19 +33,18 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }))
-const Header = ({ darkMode, actions, location, ...props }) => {
-  const [showHeader, setShowHeader] = useState(false)
+const Header = ({ appState, actions, location, ...props }) => {
   const classes = useStyles()
 
   const handleScroll = useCallback(() => {
     const { scrollY } = window
 
-    if (scrollY < 500 && showHeader) {
-      setShowHeader(false)
-    } else if (scrollY >= 500 && !showHeader) {
-      setShowHeader(true)
+    if (scrollY < 500 && appState.showHeader) {
+      actions.setShowHeader(false)
+    } else if (scrollY >= 500 && !appState.showHeader) {
+      actions.setShowHeader(true)
     }
-  }, [showHeader])
+  }, [actions, appState.showHeader])
 
   useEffect(() => {
     document.addEventListener('scroll', handleScroll)
@@ -58,13 +59,13 @@ const Header = ({ darkMode, actions, location, ...props }) => {
     const isHomePage = location.pathname === '/'
     const hideHeader = hideList.includes(location.pathname)
 
-    if (darkMode) {
+    if (appState.darkMode) {
       classList.push(classes.appBarDark)
     } else {
       classList.push(classes.appBarDefault)
     }
 
-    if (hideHeader || (!showHeader && isHomePage)) {
+    if (hideHeader || (!appState.showHeader && isHomePage)) {
       classList.push(classes.hide)
     }
 
@@ -74,29 +75,29 @@ const Header = ({ darkMode, actions, location, ...props }) => {
     classes.appBarDark,
     classes.appBarDefault,
     classes.hide,
-    darkMode,
     location.pathname,
-    showHeader,
+    appState.darkMode,
+    appState.showHeader,
   ])
 
   return (
     <AppBar className={appBarClasses} position="fixed">
       <Container>
         <Toolbar>
-          <Logo darkMode={darkMode} hideLabel />
+          <Logo darkMode={appState.darkMode} hideLabel />
 
           <div className={classes.spacer} />
 
-          <HeaderNavbar darkMode={darkMode} />
+          <HeaderNavbar darkMode={appState.darkMode} />
         </Toolbar>
       </Container>
     </AppBar>
   )
 }
 
-const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+const mapStates = ({ appState }) => ({ appState })
 
-const mapActions = {}
+const mapActions = { setShowHeader }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
