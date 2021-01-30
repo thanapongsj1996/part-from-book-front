@@ -9,19 +9,20 @@ import whiteLogo from 'assets/images/logos/logo-white.png'
 
 import COLOR from 'assets/scss/variables/__colors.scss'
 
-const HeaderLogo = ({ darkMode, hideLabel }) => {
+const HeaderLogo = ({ darkMode, hideLabel, size = 1.25 }) => {
   const useStyles = useCallback(
     makeStyles((theme) => ({
       root: {
         marginRight: theme.spacing(1),
       },
       logo: {
-        width: 40,
-        height: 30,
+        width: `${2 * size}rem`,
+        height: `${1.5 * size}rem`,
       },
       label: {
         fontWeight: 600,
         color: darkMode ? COLOR.white : COLOR.primary,
+        fontSize: `${size}rem`,
       },
     })),
     [darkMode]
