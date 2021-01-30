@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { connect } from 'react-redux'
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
@@ -6,7 +7,8 @@ import * as yup from 'yup'
 
 import LoginCard from './components/LoginCard'
 
-import background from 'assets/images/login-background.png'
+import background from 'assets/images/login/login-background.png'
+import darkBackground from 'assets/images/login/login-dark-background.png'
 
 const validationSchema = yup.object({
   username: yup.string('Enter your username').required('Username is required'),
@@ -17,10 +19,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100vw',
     height: '100vh',
-    background: `url(${background})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+  },
+  background: {
+    background: `url(${background}) center/cover no-repeat`,
+  },
+  darkBackground: {
+    background: `url(${darkBackground}) center/cover no-repeat`,
   },
   container: {
     paddingTop: theme.spacing(6),
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Login = () => {
+const Login = ({ darkMode, ...props }) => {
   const classes = useStyles()
   const formik = useFormik({
     initialValues: { username: '', password: '' },
@@ -46,13 +50,31 @@ const Login = () => {
     console.log('Submit username:', values.username)
   }
 
+  const rootClasses = useMemo(() => {
+    const classList = [classes.root]
+    if (darkMode) {
+      classList.push(classes.darkBackground)
+    } else {
+      classList.push(classes.background)
+    }
+
+    return classList.join(' ')
+  }, [classes.background, classes.darkBackground, classes.root, darkMode])
+
   return (
-    <section className={classes.root}>
+    <section className={rootClasses}>
       <Container className={classes.container}>
-        <LoginCard formik={formik} />
+        <LoginCard darkMode={darkMode} formik={formik} />
       </Container>
     </section>
   )
 }
 
-export default Login
+const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+
+const mapActions = {}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(Login)

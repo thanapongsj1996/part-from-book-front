@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Card,
   CardContent,
@@ -18,8 +18,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
     padding: `40px 16px`,
-    background: 'rgba(229, 229, 229, 0.94)',
     borderRadius: theme.spacing(1),
+  },
+  rootBackground: {
+    background: 'rgba(229, 229, 229, 0.94)',
+  },
+  rootDarkBackground: {
+    background: 'rgba(24, 24, 24, 0.5)',
   },
   cardContent: {
     paddingLeft: 0,
@@ -45,11 +50,20 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
     borderRadius: 3,
     '& > .MuiInputBase-root': {
-      background: 'rgba(249, 249, 249, 0.8)',
       border: `1px solid ${COLOR.grey3}`,
     },
     [theme.breakpoints.down('xs')]: {
       width: '90%',
+    },
+  },
+  inputBackground: {
+    '& > .MuiInputBase-root': {
+      background: 'rgba(249, 249, 249, 0.8)',
+    },
+  },
+  inputDarkBackground: {
+    '& > .MuiInputBase-root': {
+      background: 'rgba(56, 56, 56, 0.7)',
     },
   },
   submitBtn: {
@@ -63,11 +77,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const LoginCard = ({ formik }) => {
+const LoginCard = ({ darkMode, formik }) => {
   const classes = useStyles()
 
+  const cardClasses = useMemo(() => {
+    const classList = [classes.root]
+    if (darkMode) {
+      classList.push(classes.rootDarkBackground)
+    } else {
+      classList.push(classes.rootBackground)
+    }
+
+    return classList.join(' ')
+  }, [
+    classes.root,
+    classes.rootBackground,
+    classes.rootDarkBackground,
+    darkMode,
+  ])
+
+  const inputClasses = useMemo(() => {
+    const classList = [classes.input]
+    if (darkMode) {
+      classList.push(classes.inputDarkBackground)
+    } else {
+      classList.push(classes.inputBackground)
+    }
+
+    return classList.join(' ')
+  }, [
+    classes.input,
+    classes.inputBackground,
+    classes.inputDarkBackground,
+    darkMode,
+  ])
+
   return (
-    <Card className={classes.root}>
+    <Card className={cardClasses}>
       <CardContent className={classes.cardContent}>
         <Grid
           container
@@ -76,7 +122,7 @@ const LoginCard = ({ formik }) => {
           spacing={2}
         >
           <Grid item className={'prevent-click ' + classes.logoWrapper}>
-            <Logo size={1.625} />
+            <Logo darkMode={darkMode} size={1.625} />
           </Grid>
 
           <Grid item xs={12}>
@@ -88,7 +134,7 @@ const LoginCard = ({ formik }) => {
 
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <TextField
-              className={classes.input}
+              className={inputClasses}
               variant="outlined"
               name="username"
               placeholder="อีเมล"
@@ -98,7 +144,7 @@ const LoginCard = ({ formik }) => {
               helperText={formik.touched.username && formik.errors.username}
             />
             <TextField
-              className={classes.input}
+              className={inputClasses}
               variant="outlined"
               name="password"
               placeholder="รหัสผ่าน"
@@ -144,6 +190,7 @@ const LoginCard = ({ formik }) => {
                   to="/register"
                   underline="always"
                   className={classes.link}
+                  color={darkMode ? 'inherit' : 'primary'}
                 >
                   สมัครสมาชิก
                 </MuiLink>
