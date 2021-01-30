@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 // import { Menu } from '@material-ui/icons'
 
-// import HeaderPopMenu from './HeaderPopmenu'
+import HeaderSettingMenu from './HeaderSettingMenu'
 import { NAV_LIST } from '../constants/header-menu.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
 
@@ -42,16 +42,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderNavbar = ({ darkMode, location }) => {
   const classes = useStyles()
-  // const theme = useTheme()
-  // const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
-
-  // const [profilePopover, setProfilePopover] = useState(null)
-
-  // useEffect(() => {
-  //   setProfilePopover(null)
-  // }, [isMobile])
-
-  // const onShowPopMenu = (event) => setProfilePopover(event.currentTarget)
 
   const getNavClass = useCallback(
     (url) => {
@@ -100,6 +90,8 @@ const HeaderNavbar = ({ darkMode, location }) => {
           {menu.title}
         </Button>
       ))}
+
+      <HeaderSettingMenu />
 
       {/* <Button
               classes={{ root: classes.authLabel }}

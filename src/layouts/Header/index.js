@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useCallback, useState } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { AppBar, Toolbar, Container, Switch, Tooltip } from '@material-ui/core'
+import { AppBar, Toolbar, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Logo from 'global/components/Logo'
 import HeaderNavbar from './components/HeaderNavbar'
-import { toggleDarkMode } from 'actions/app.action'
 
 import COLOR from 'assets/scss/variables/__colors.scss'
 
@@ -88,16 +87,6 @@ const Header = ({ darkMode, actions, location, ...props }) => {
 
           <div className={classes.spacer} />
 
-          {/* dark mode swith */}
-          <Tooltip title="โหมดกลางคืน" arrow>
-            <Switch
-              checked={darkMode}
-              onChange={actions.toggleDarkMode}
-              color="secondary"
-              inputProps={{ 'aria-label': 'toggle theme' }}
-            />
-          </Tooltip>
-
           <HeaderNavbar darkMode={darkMode} />
         </Toolbar>
       </Container>
@@ -107,7 +96,7 @@ const Header = ({ darkMode, actions, location, ...props }) => {
 
 const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
 
-const mapActions = { toggleDarkMode }
+const mapActions = {}
 
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
