@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, CircularProgress } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { Grid, useMediaQuery, CircularProgress } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 
-import Api from 'api'
 import ArticleCard from 'global/components/Article/ArticleCard'
+
+import { ARTICLE } from '../constants/article.const'
+
+import { fetchArticles } from 'actions/article.action'
 
 const useStyles = makeStyles((theme) => ({
   article: {
@@ -16,27 +19,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function AricleList() {
+const AricleList = ({ actions, ...props }) => {
   const classes = useStyles()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   const [articles, setArticles] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      setIsLoading(true)
-
-      const url = Api.getAllArticles()
-      const { data } = await axios.get(url)
-
-      setArticles(data.data)
-      setIsLoading(false)
-    }
-    fetchArticles()
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const fetchData = async () => {
+    setLoading(true)
+    try {
+      const perPage = isMobile
+        ? ARTICLE.PER_PAGE.MOBILE
+        : ARTICLE.PER_PAGE.DESKTOP
+      const res = await actions.fetchArticles(1, perPage)
+      setArticles(res.data)
+    } catch (e) {
+      console.error(e.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <div className={classes.progress}>
           <CircularProgress color="secondary" />
         </div>
@@ -52,3 +64,12 @@ export default function AricleList() {
     </>
   )
 }
+
+const mapStates = () => ({})
+
+const mapActions = { fetchArticles }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(AricleList)
