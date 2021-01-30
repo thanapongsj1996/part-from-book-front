@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
-import HomePage from 'pages/home'
+import RegisterPage from 'pages/register'
 
 export default function ArticleRoutes() {
   const { path } = useRouteMatch()
@@ -9,7 +9,7 @@ export default function ArticleRoutes() {
   return (
     <Switch>
       <Route path={`${path}`}>
-        <HomePage />
+        <RegisterPage />
       </Route>
     </Switch>
   )
