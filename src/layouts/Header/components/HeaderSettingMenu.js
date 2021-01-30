@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
   Button,
@@ -43,9 +43,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const HeaderPopmenu = ({ darkMode, actions, ...props }) => {
+const HeaderPopmenu = ({ darkMode, showHeader, actions, ...props }) => {
   const classes = useStyles()
   const [menuPostion, setMenuPostion] = useState(null)
+
+  useEffect(() => {
+    setMenuPostion(null)
+  }, [showHeader])
 
   const toggleOpenSubMenu = (event) => {
     if (menuPostion) {
@@ -109,7 +113,10 @@ const HeaderPopmenu = ({ darkMode, actions, ...props }) => {
   )
 }
 
-const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+const mapStates = ({ appState }) => ({
+  darkMode: appState.darkMode,
+  showHeader: appState.showHeader,
+})
 
 const mapActions = { toggleDarkMode }
 
