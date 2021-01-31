@@ -17,8 +17,9 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
 
   const fetchData = async () => {
     try {
-      const res = await actions.fetchArticles(1, 4)
-      setArticles(res.data)
+      const { data } = await actions.fetchArticles(1, 4)
+      const { articles, ...pagination } = data
+      setArticles(articles)
     } catch (e) {
       console.error(e.message)
     }
