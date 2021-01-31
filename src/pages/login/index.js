@@ -19,25 +19,21 @@ const validationSchema = yup.object({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'relative',
     maxWidth: '100vw',
     minHeight: '100vh',
   },
   background: {
-    background: `url(${background}) center/cover no-repeat`,
+    background: `url(${background}) center/cover no-repeat fixed`,
   },
   darkBackground: {
-    background: `url(${darkBackground}) center/cover no-repeat`,
+    background: `url(${darkBackground}) center/cover no-repeat fixed`,
   },
   container: {
-    padding: '48px 0 24px',
-    height: '100%',
+    padding: '48px 24px 24px',
     [theme.breakpoints.down('xs')]: {
-      position: 'absolute',
-      padding: 0,
+      padding: theme.spacing(2),
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
     },
   },
 }))
@@ -51,7 +47,7 @@ const Login = ({ darkMode, ...props }) => {
   })
 
   const submit = (values) => {
-    console.log('Submit email:', values.email)
+    alert('Submit email:', values.email)
   }
 
   const rootClasses = useMemo(() => {

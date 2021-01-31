@@ -17,7 +17,7 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
-    padding: `40px 16px`,
+    padding: `30px 16px 20px`,
     borderRadius: theme.spacing(1),
   },
   rootBackground: {
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     margin: '0 auto',
     marginBottom: theme.spacing(3),
+    [theme.breakpoints.down('xs')]: {
+      width: '90%',
+    },
   },
   form: {
     width: '100%',

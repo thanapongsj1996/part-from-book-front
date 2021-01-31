@@ -30,9 +30,6 @@ const ArticleCard = ({
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   const verticalMode = orientation === 'vertical' || isMobile
-  const isHomeRoute = useMemo(() => history.location.pathname === '/', [
-    history.location.pathname,
-  ])
 
   const typographys = {
     title: verticalMode ? 'body1' : 'h6',
@@ -45,10 +42,7 @@ const ArticleCard = ({
       root: {
         display: 'flex',
         flexDirection: verticalMode ? 'column' : 'row',
-        backgroundColor:
-          verticalMode && isHomeRoute
-            ? 'transparent'
-            : theme.palette.background.paper,
+        boxShadow: 'none',
       },
       title: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
@@ -62,9 +56,9 @@ const ArticleCard = ({
         height: 200,
       },
       coverLandscape: {
-        minWidth: 250,
+        minWidth: 400,
         [theme.breakpoints.down('sm')]: {
-          minWidth: 150,
+          minWidth: 200,
         },
       },
       infoWrapper: {
