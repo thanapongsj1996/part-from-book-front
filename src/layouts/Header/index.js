@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer,
     transition: 'opacity .5s',
-    opacity: 1,
+    opacity: 0.97,
   },
   appBarDefault: {
-    backgroundColor: COLOR.white,
+    backgroundColor: COLOR.grey1,
   },
   appBarDark: {
     backgroundColor: COLOR.dark1,
