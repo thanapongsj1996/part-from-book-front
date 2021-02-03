@@ -17,17 +17,17 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     color: COLOR.black,
+    '&+.active': {
+      color: COLOR.primary,
+      fontWeight: 600,
+    },
   },
   navDark: {
     color: COLOR.grey3,
-  },
-  navActive: {
-    color: COLOR.primary,
-    fontWeight: 600,
-  },
-  navDarkActive: {
-    color: COLOR.white,
-    fontWeight: 600,
+    '&+.active': {
+      color: COLOR.white,
+      fontWeight: 600,
+    },
   },
   authLabel: {
     textTransform: 'none',
@@ -46,27 +46,30 @@ const HeaderNavbar = ({ darkMode, location }) => {
   const getNavClass = useCallback(
     (url) => {
       const classList = [classes.navButton]
+      let isActive
+
+      if (url === '/') {
+        isActive = location.pathname === url
+      } else {
+        isActive = location.pathname.includes(url)
+      }
 
       if (darkMode) {
         classList.push(classes.navDark)
-        if (location.pathname === url) {
-          classList.push(classes.navDarkActive)
-        }
       } else {
         classList.push(classes.nav)
-        if (location.pathname === url) {
-          classList.push(classes.navActive)
-        }
+      }
+
+      if (isActive) {
+        classList.push('active')
       }
 
       return classList.join(' ')
     },
     [
       classes.nav,
-      classes.navActive,
       classes.navButton,
       classes.navDark,
-      classes.navDarkActive,
       darkMode,
       location.pathname,
     ]
