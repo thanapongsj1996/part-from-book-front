@@ -43,6 +43,10 @@ body {
   pointer-events: none;
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
 @media screen and (max-width: 959px) {
   html,
   body {
