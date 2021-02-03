@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { connect } from 'react-redux'
-import { Grid, useMediaQuery, CircularProgress } from '@material-ui/core'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { Grid, useMediaQuery } from '@material-ui/core'
+import { useTheme } from '@material-ui/core/styles'
 
 import ArticleCard from 'global/components/Article/ArticleCard'
 
@@ -9,59 +9,53 @@ import { ARTICLE } from '../constants/article.const'
 
 import { fetchArticles } from 'actions/article.action'
 
-const useStyles = makeStyles((theme) => ({
-  article: {
-    marginBottom: theme.spacing(2),
-  },
-  progress: {
-    textAlign: 'center',
-    marginTop: theme.spacing(8),
-  },
-}))
-
 const AricleList = ({ actions, ...props }) => {
-  const classes = useStyles()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
+  const perPage = useRef(ARTICLE.PER_PAGE.DESKTOP)
   const [articles, setArticles] = useState([])
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [perPage])
+
+  useEffect(() => {
+    perPage.current = isMobile
+      ? ARTICLE.PER_PAGE.MOBILE
+      : ARTICLE.PER_PAGE.DESKTOP
+  }, [isMobile])
 
   const fetchData = async () => {
-    setLoading(true)
+    setArticles(getEmptyObject())
     try {
-      const perPage = isMobile
-        ? ARTICLE.PER_PAGE.MOBILE
-        : ARTICLE.PER_PAGE.DESKTOP
-      const { data } = await actions.fetchArticles(1, perPage)
+      const { data } = await actions.fetchArticles(1, perPage.current)
       const { articles, ...pagination } = data
       setArticles(articles)
     } catch (e) {
       console.error(e.message)
-    } finally {
-      setLoading(false)
     }
   }
 
+  const getEmptyObject = useCallback(() => {
+    const result = []
+
+    for (let i = 0; i < perPage.current; i++) {
+      result.push({ loading: true })
+    }
+
+    return result
+  }, [perPage])
+
   return (
     <>
-      {loading ? (
-        <div className={classes.progress}>
-          <CircularProgress color="secondary" />
-        </div>
-      ) : (
-        <Grid container spacing={3}>
-          {articles.map((article) => (
-            <Grid key={article._id} item xs={12} sm={6} md={4}>
-              <ArticleCard key={article._id} article={article} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
+      <Grid container spacing={3}>
+        {articles.map((article, index) => (
+          <Grid key={article._id || index} item xs={12} sm={6} md={4}>
+            <ArticleCard key={article._id} article={article} />
+          </Grid>
+        ))}
+      </Grid>
     </>
   )
 }

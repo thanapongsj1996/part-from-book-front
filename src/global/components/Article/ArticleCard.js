@@ -11,6 +11,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { Skeleton } from '@material-ui/lab'
 
 import UserAvatar from 'global/components/User/UserAvatar'
 
@@ -67,22 +68,12 @@ const ArticleCard = ({
       info: {
         color: darkMode ? COLOR.grey3 : COLOR.grey2,
       },
-      hideBorder: {
-        boxShadow: 'none',
-      },
     })),
     [orientation, darkMode, isMobile]
   )
   const classes = useStyles()
 
-  const cardClass = useMemo(() => {
-    const className = [classes.root, 'cursor-pointer']
-    if (verticalMode) {
-      className.push(classes.hideBorder)
-    }
-
-    return className.join(' ')
-  }, [classes.hideBorder, classes.root, verticalMode])
+  const loading = useMemo(() => !article.title, [article.title])
 
   const shortTitle = () => {
     const title = article.title
@@ -108,39 +99,72 @@ const ArticleCard = ({
   }
 
   const writerName = useMemo(() => {
+    if (loading) {
+      return ''
+    }
+
     const { fname, lname } = article.writer
     return `${fname} ${lname}`
-  }, [article])
+  }, [article.writer, loading])
 
   const openArticleDetailPage = () => history.push(`/articles/${article._id}`)
 
   return (
     <Card
       component={Paper}
-      className={cardClass}
+      className={classes.root + ' cursor-pointer'}
       onClick={openArticleDetailPage}
     >
-      <CardMedia
-        className={verticalMode ? classes.cover : classes.coverLandscape}
-        image={article.photo}
-        title={article.title}
-      />
+      {loading ? (
+        <Skeleton
+          width={verticalMode ? '100%' : 500}
+          height={verticalMode ? 200 : 'auto'}
+          variant="rect"
+          animation="wave"
+        ></Skeleton>
+      ) : (
+        <CardMedia
+          className={verticalMode ? classes.cover : classes.coverLandscape}
+          image={article.photo}
+          title={article.title}
+        />
+      )}
 
-      <CardContent>
-        <Typography
-          className={classes.title}
-          variant={typographys.title}
-          component="h4"
-        >
-          {shortTitle()}
-        </Typography>
+      <CardContent className="w-100">
+        {loading ? (
+          <Skeleton
+            width="60%"
+            className={classes.title}
+            animation="wave"
+          ></Skeleton>
+        ) : (
+          <Typography
+            className={classes.title}
+            variant={typographys.title}
+            component="h4"
+          >
+            {shortTitle()}
+          </Typography>
+        )}
 
-        <Typography
-          className={classes.description}
-          variant={typographys.desciption}
-        >
-          {shortDescription()}
-        </Typography>
+        {loading ? (
+          <>
+            <Skeleton width="90%" animation="wave"></Skeleton>
+            <Skeleton width="90%" animation="wave"></Skeleton>
+            <Skeleton
+              width="90%"
+              className={classes.description}
+              animation="wave"
+            ></Skeleton>
+          </>
+        ) : (
+          <Typography
+            className={classes.description}
+            variant={typographys.desciption}
+          >
+            {shortDescription()}
+          </Typography>
+        )}
 
         <Grid
           container
@@ -149,14 +173,30 @@ const ArticleCard = ({
           spacing={2}
         >
           <Grid item>
-            <UserAvatar
-              photo={article?.writer?.photo}
-              name={article.writer.fname}
-            />
+            {loading ? (
+              <Skeleton
+                animation="wave"
+                variant="circle"
+                width={40}
+                height={40}
+              />
+            ) : (
+              <UserAvatar
+                photo={article?.writer?.photo}
+                name={article.writer.fname}
+              />
+            )}
           </Grid>
           <Grid item>
             <Typography className={classes.info} variant={typographys.info}>
-              {verticalMode ? (
+              {loading && verticalMode ? (
+                <>
+                  <Skeleton width={150} animation="wave"></Skeleton>
+                  <Skeleton width={150} animation="wave"></Skeleton>
+                </>
+              ) : loading && !verticalMode ? (
+                <Skeleton width={180} animation="wave"></Skeleton>
+              ) : verticalMode ? (
                 <span>
                   {writerName} <br /> {utils.timeConverted(article.updatedAt)}
                 </span>
