@@ -1,6 +1,6 @@
 export const ARTICLE = {
   PER_PAGE: {
-    DESKTOP: 15,
-    MOBILE: 10,
+    DESKTOP: 12,
+    MOBILE: 6,
   },
 }
