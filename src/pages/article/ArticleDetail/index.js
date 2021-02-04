@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Container, Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Container, Grid, Button, useMediaQuery } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import WriterCard from './components/WriterCard'
 import ArticleDatailCard from './components/ArticleDetailCard'
@@ -15,12 +15,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.mixins.toolbar.minHeight + theme.spacing(5),
     paddingBottom: theme.spacing(5),
   },
+  editBtn: {
+    width: 80,
+  },
 }))
 
 const ArticleDetail = ({ actions, ...props }) => {
-  const classes = useStyles()
-  const [article, setArticle] = useState({})
   const { id } = useParams()
+  const classes = useStyles()
+  const theme = useTheme()
+  const mdUp = useMediaQuery(theme.breakpoints.up('md'))
+  const [article, setArticle] = useState({})
 
   useEffect(() => {
     fetchData()
@@ -41,11 +46,22 @@ const ArticleDetail = ({ actions, ...props }) => {
   return (
     <Container className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs="auto">
-          <WriterCard writer={article.writer} />
+        {mdUp && (
+          <Grid item xs="auto">
+            <WriterCard writer={article.writer} />
+          </Grid>
+        )}
+        <Grid item xs={12} md={8}>
+          <ArticleDatailCard article={article} mdUp={mdUp} />
         </Grid>
-        <Grid item xs={12} md={9}>
-          <ArticleDatailCard article={article} />
+        <Grid item>
+          <Button
+            className={classes.editBtn}
+            variant="contained"
+            color="primary"
+          >
+            แก้ไข
+          </Button>
         </Grid>
       </Grid>
 

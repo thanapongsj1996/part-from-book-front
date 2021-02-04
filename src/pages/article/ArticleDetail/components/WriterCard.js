@@ -6,7 +6,8 @@ import UserAvatar from 'global/components/User/UserAvatar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '0 2rem',
+    padding: '0 1rem',
+    width: 150,
   },
   penName: {
     fontWeight: 600,
