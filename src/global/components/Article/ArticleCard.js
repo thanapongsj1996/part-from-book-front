@@ -52,6 +52,8 @@ const ArticleCard = ({
       },
       description: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
+        fontFamily: 'Sarabun, sans-serif !important',
+        fontWeight: 300,
       },
       cover: {
         height: 200,

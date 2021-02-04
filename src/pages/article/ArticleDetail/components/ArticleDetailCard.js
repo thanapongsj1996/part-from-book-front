@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 350,
+    marginBottom: '1rem',
+  },
+  description: {
+    fontFamily: 'Sarabun, sans-serif !important',
+    fontWeight: 300,
   },
   // card: {
   //   boxShadow: '0px 0px 4px -1px rgba(0,0,0,0.75)',
@@ -59,29 +64,8 @@ const ArticleDetailCard = ({ article, ...props }) => {
           <CardMedia className={classes.media} image={article.photo} />
 
           <CardContent>
-            <Typography variant="body1" className={classes.body}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ส่วนหนึ่งของหนังสือ
-              จึงรวบรวมบทความและคอร์สอบรมอันหลากหลาย
-              เพื่อตอบสนองการเขียนโปรแกรมในแต่ละภาษา
-              พร้อมหลักการที่สำคัญเช่นคณิตศาสตร์และอัลกอริทึม
-              <br />
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Etiam condimentum lectus sed quam
-              vehicula, in posuere lorem sagittis. Pellentesque habitant morbi
-              tristique senectus et netus et malesuada fames ac turpis egestas.
-              Donec egestas elit augue, sit amet ultricies erat malesuada id.
-              Fusce sit amet dignissim dolor, ut tempor nunc. In hac habitasse
-              platea dictumst. Donec ultricies volutpat erat. Ut viverra ante ac
-              lacinia scelerisque. Etiam convallis in purus nec condimentum.
-              Fusce vitae sem tellus. Aenean commodo odio sed interdum
-              pellentesque. Sed nec
-              <br />
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sapien facilisis cursus
-              euismod, lacus ex porta nibh, vel viverra leo libero et massa.
-              Phasellus semper tristique nunc at imperdiet. Mauris a luctus
-              lacus. Vivamus nec euismod ligula. Vestibulum vel lacinia.
+            <Typography variant="body1" className={classes.description}>
+              {article.body}
             </Typography>
           </CardContent>
         </Card>
