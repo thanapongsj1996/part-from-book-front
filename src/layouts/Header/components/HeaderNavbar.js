@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     color: COLOR.black,
-    '&+.active': {
+    '&.active': {
       color: COLOR.primary,
       fontWeight: 600,
     },
   },
   navDark: {
     color: COLOR.grey3,
-    '&+.active': {
+    '&.active': {
       color: COLOR.white,
       fontWeight: 600,
     },

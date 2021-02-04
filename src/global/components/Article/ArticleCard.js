@@ -15,7 +15,7 @@ import { Skeleton } from '@material-ui/lab'
 
 import UserAvatar from 'global/components/User/UserAvatar'
 
-import utils from 'utils'
+import { timeConverted } from 'utils/thaiTimeConvert'
 
 import { ARTICLE } from 'global/constants/article.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
@@ -126,7 +126,6 @@ const ArticleCard = ({
         <CardMedia
           className={verticalMode ? classes.cover : classes.coverLandscape}
           image={article.photo}
-          title={article.title}
         />
       )}
 
@@ -198,12 +197,12 @@ const ArticleCard = ({
                 <Skeleton width={180} animation="wave"></Skeleton>
               ) : verticalMode ? (
                 <span>
-                  {writerName} <br /> {utils.timeConverted(article.updatedAt)}
+                  {writerName} <br /> {timeConverted(article.updatedAt)}
                 </span>
               ) : (
                 <span>
                   {writerName} &nbsp; &#8226; &nbsp;
-                  {utils.timeConverted(article.updatedAt)}
+                  {timeConverted(article.updatedAt)}
                 </span>
               )}
             </Typography>

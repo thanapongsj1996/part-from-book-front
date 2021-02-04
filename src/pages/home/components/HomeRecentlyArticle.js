@@ -7,7 +7,7 @@ import SeparatorText from 'global/components/SeparatorText'
 
 import { fetchArticles } from 'actions/article.action'
 
-const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
+const HomeRecentlyArticle = ({ actions, ...props }) => {
   const [articles, setArticles] = useState([{}, {}, {}, {}])
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
   const fetchData = async () => {
     try {
       const { data } = await actions.fetchArticles(1, 4)
-      const { articles, ...pagination } = data
+      const { articles } = data
       setArticles(articles)
     } catch (e) {
       console.error(e.message)
@@ -43,7 +43,7 @@ const HomeRecentlyArticle = ({ darkMode, actions, ...props }) => {
   )
 }
 
-const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
+const mapStates = () => ({})
 
 const mapActions = { fetchArticles }
 
