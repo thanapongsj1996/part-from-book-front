@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Card,
   CardHeader,
@@ -7,6 +7,10 @@ import {
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { Skeleton } from '@material-ui/lab'
+
+import SkeletonMultipleLine from 'global/components/Skeleton/SkeletonMultipleLine'
+
 import { timeConverted } from 'utils/thaiTimeConvert'
 
 const useStyles = makeStyles((theme) => ({
@@ -14,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
     padding: '2rem',
   },
   title: {
-    fontSize: '1.875',
+    fontSize: '1.875rem',
     fontWeight: 600,
+    marginBottom: '0.35em',
   },
   media: {
     height: 350,
@@ -25,52 +30,49 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Sarabun, sans-serif !important',
     fontWeight: 300,
   },
-  // card: {
-  //   boxShadow: '0px 0px 4px -1px rgba(0,0,0,0.75)',
-  // },
-  // writerName: {
-  //   fontSize: '1.125rem',
-  // },
-  // title: {
-  //   color: theme.palette.text.primary,
-  //   padding: '16px 16px 0px 16px',
-  // },
-  // body: {
-  //   color: theme.palette.text.primary,
-  //   fontSize: '1.125rem',
-  // },
 }))
 
 const ArticleDetailCard = ({ article, ...props }) => {
   const classes = useStyles()
+  const loading = useMemo(() => !article._id, [article._id])
 
   return (
-    <>
-      {article.title && (
-        <Card>
-          <CardHeader
-            className={classes.cardHeader}
-            title={article.title}
-            titleTypographyProps={{
-              variant: 'h4',
-              component: 'h1',
-              className: classes.title,
-              gutterBottom: true,
-            }}
-            subheader={timeConverted(article.updatedAt, 'short')}
-            subheaderTypographyProps={{ variant: 'subtitle2' }}
-          />
-
-          <CardMedia className={classes.media} image={article.photo} />
-
-          <CardContent>
-            <Typography variant="body1" className={classes.description}>
-              {article.body}
-            </Typography>
-          </CardContent>
-        </Card>
+    <Card>
+      {loading ? (
+        <div className={classes.cardHeader}>
+          <Skeleton className={classes.title} width="80%" />
+          <Skeleton width={120} />
+        </div>
+      ) : (
+        <CardHeader
+          className={classes.cardHeader}
+          title={article.title}
+          titleTypographyProps={{
+            variant: 'h4',
+            component: 'h1',
+            className: classes.title,
+          }}
+          subheader={timeConverted(article.updatedAt, 'short')}
+          subheaderTypographyProps={{ variant: 'subtitle2' }}
+        />
       )}
-    </>
+
+      {loading ? (
+        <Skeleton variant="rect" className={classes.media} />
+      ) : (
+        <CardMedia className={classes.media} image={article.photo} />
+      )}
+
+      <CardContent>
+        {loading ? (
+          <SkeletonMultipleLine numberLine={6} />
+        ) : (
+          <Typography variant="body1" className={classes.description}>
+            {article.body}
+          </Typography>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

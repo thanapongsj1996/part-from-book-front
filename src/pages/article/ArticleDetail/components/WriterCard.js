@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Card, CardContent, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { Skeleton } from '@material-ui/lab'
 
 import UserAvatar from 'global/components/User/UserAvatar'
 
@@ -8,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: '0 1rem',
     width: 150,
+  },
+  avatarLoading: {
+    width: '5rem',
+    height: '5rem',
   },
   penName: {
     fontWeight: 600,
@@ -18,21 +23,31 @@ const useStyles = makeStyles((theme) => ({
 const WriterCard = ({ writer }) => {
   const classes = useStyles()
 
+  const loading = useMemo(() => !writer, [writer])
+
   return (
     <Card className={classes.root}>
       <CardContent>
         <Grid container direction="column" justify="center" spacing={1}>
           <Grid item>
-            <UserAvatar
-              photo={writer?.photo}
-              name={writer?.fname}
-              size="large"
-            />
+            {loading ? (
+              <Skeleton variant="circle" className={classes.avatarLoading} />
+            ) : (
+              <UserAvatar
+                photo={writer?.photo}
+                name={writer?.fname}
+                size="large"
+              />
+            )}
           </Grid>
           <Grid item>
-            <Typography variant="body1" className={classes.penName}>
-              {writer?.dname}
-            </Typography>
+            {loading ? (
+              <Skeleton width="100%" />
+            ) : (
+              <Typography variant="body1" className={classes.penName}>
+                {writer?.dname}
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </CardContent>

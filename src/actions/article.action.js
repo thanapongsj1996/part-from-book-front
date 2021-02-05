@@ -13,7 +13,10 @@ export const fetchArticles = (page = 1, limit = 5) => {
 
 export const fetchArticleById = (id) => {
   console.log(id)
-  return async () => await { data: mockArticle }
+  return async () =>
+    await new Promise((resolve) =>
+      setTimeout(() => resolve({ data: mockArticle }), 1500)
+    )
 }
 
 const mockArticle = {
