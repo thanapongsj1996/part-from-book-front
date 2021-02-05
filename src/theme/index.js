@@ -8,12 +8,12 @@ import COLOR from 'assets/scss/variables/__colors.scss'
 
 const ThemeOverride = ({ darkMode, children }) => {
   const getTitleTextColor = useMemo(
-    () => (darkMode ? COLOR.white : COLOR.primary),
+    () => (darkMode ? COLOR.WHITE : COLOR.PRIMARY),
     [darkMode]
   )
 
   const getSubTitleTextColor = useMemo(
-    () => (darkMode ? COLOR.white : COLOR.black),
+    () => (darkMode ? COLOR.WHITE : COLOR.BLACK),
     [darkMode]
   )
 
@@ -23,15 +23,15 @@ const ThemeOverride = ({ darkMode, children }) => {
         palette: {
           type: darkMode ? 'dark' : 'light',
           primary: {
-            main: COLOR.primary,
-            light: COLOR.primaryLighter,
-            dark: COLOR.primaryDarker,
+            main: COLOR.PRIMARY,
+            light: COLOR.PRIMARY_LIGHTER,
+            dark: COLOR.PRIMARY_DARKER,
           },
           secondary: {
             main: '#BDC3C7',
           },
           background: {
-            paper: darkMode ? COLOR.dark2 : COLOR.white,
+            paper: darkMode ? COLOR.DARK2 : COLOR.WHITE,
           },
         },
         typography: {
@@ -65,7 +65,7 @@ const ThemeOverride = ({ darkMode, children }) => {
             root: {
               fontSize: '1.25rem',
               fontWeight: 400,
-              color: COLOR.grey1,
+              color: COLOR.GREY1,
             },
           },
           MuiTimelineContent: {
@@ -75,12 +75,12 @@ const ThemeOverride = ({ darkMode, children }) => {
           },
           MuiTimelineDot: {
             defaultGrey: {
-              backgroundColor: COLOR.grey1,
+              backgroundColor: COLOR.GREY1,
             },
           },
           MuiTimelineConnector: {
             root: {
-              backgroundColor: COLOR.grey1,
+              backgroundColor: COLOR.GREY1,
             },
           },
         },

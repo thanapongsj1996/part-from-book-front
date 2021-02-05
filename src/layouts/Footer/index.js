@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     minHeight: 250,
-    backgroundColor: COLOR.primary,
-    color: COLOR.white,
+    backgroundColor: COLOR.PRIMARY,
+    color: COLOR.WHITE,
     marginTop: theme.spacing(8),
   },
   menuWrapper: {

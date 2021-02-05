@@ -49,7 +49,7 @@ const ArticleCard = ({
       title: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
         fontWeight: verticalMode ? 500 : 600,
-        color: darkMode ? COLOR.white : COLOR.black,
+        color: darkMode ? COLOR.WHITE : COLOR.BLACK,
       },
       description: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
@@ -69,7 +69,7 @@ const ArticleCard = ({
         marginTop: theme.spacing(2),
       },
       info: {
-        color: darkMode ? COLOR.grey3 : COLOR.grey2,
+        color: darkMode ? COLOR.GREY3 : COLOR.GREY2,
       },
     })),
     [orientation, darkMode, isMobile]

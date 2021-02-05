@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 1),
   },
   buttonFont: {
-    color: COLOR.black,
+    color: COLOR.BLACK,
   },
   buttonDarkFont: {
-    color: COLOR.grey3,
+    color: COLOR.GREY3,
   },
   popper: {
     zIndex: theme.zIndex.drawer + 1,

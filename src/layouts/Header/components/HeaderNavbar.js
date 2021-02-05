@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 1),
   },
   nav: {
-    color: COLOR.black,
+    color: COLOR.BLACK,
     '&.active': {
-      color: COLOR.primary,
+      color: COLOR.PRIMARY,
       fontWeight: 600,
     },
   },
   navDark: {
-    color: COLOR.grey3,
+    color: COLOR.GREY3,
     '&.active': {
-      color: COLOR.white,
+      color: COLOR.WHITE,
       fontWeight: 600,
     },
   },
@@ -33,10 +33,10 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
   },
   icon: {
-    color: COLOR.primary,
+    color: COLOR.PRIMARY,
   },
   iconDark: {
-    color: COLOR.white,
+    color: COLOR.WHITE,
   },
 }))
 

@@ -19,8 +19,8 @@ const SeparatorText = ({ text, size = 1.875, darkMode }) => {
           content: "''",
           flex: 1,
           borderBottom: darkMode
-            ? `1px solid ${COLOR.white}`
-            : `1px solid ${COLOR.primary}`,
+            ? `1px solid ${COLOR.WHITE}`
+            : `1px solid ${COLOR.PRIMARY}`,
           marginBottom: theme.spacing(1),
           marginLeft: theme.spacing(3),
         },
