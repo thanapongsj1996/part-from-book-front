@@ -84,6 +84,11 @@ const ThemeOverride = ({ darkMode, children }) => {
             },
           },
         },
+        props: {
+          MuiSkeleton: {
+            animation: 'wave',
+          },
+        },
       }),
     [darkMode, getSubTitleTextColor, getTitleTextColor]
   )

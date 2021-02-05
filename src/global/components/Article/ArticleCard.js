@@ -122,7 +122,6 @@ const ArticleCard = ({
           width={verticalMode ? '100%' : 500}
           height={verticalMode ? 200 : 'auto'}
           variant="rect"
-          animation="wave"
         ></Skeleton>
       ) : (
         <CardMedia
@@ -133,11 +132,7 @@ const ArticleCard = ({
 
       <CardContent className="w-100">
         {loading ? (
-          <Skeleton
-            width="60%"
-            className={classes.title}
-            animation="wave"
-          ></Skeleton>
+          <Skeleton width="60%" className={classes.title}></Skeleton>
         ) : (
           <Typography
             className={classes.title}
@@ -150,13 +145,9 @@ const ArticleCard = ({
 
         {loading ? (
           <>
-            <Skeleton width="90%" animation="wave"></Skeleton>
-            <Skeleton width="90%" animation="wave"></Skeleton>
-            <Skeleton
-              width="90%"
-              className={classes.description}
-              animation="wave"
-            ></Skeleton>
+            <Skeleton width="90%"></Skeleton>
+            <Skeleton width="90%"></Skeleton>
+            <Skeleton width="90%" className={classes.description}></Skeleton>
           </>
         ) : (
           <Typography
@@ -175,12 +166,7 @@ const ArticleCard = ({
         >
           <Grid item>
             {loading ? (
-              <Skeleton
-                animation="wave"
-                variant="circle"
-                width={40}
-                height={40}
-              />
+              <Skeleton variant="circle" width={40} height={40} />
             ) : (
               <UserAvatar
                 photo={article?.writer?.photo}
@@ -192,11 +178,11 @@ const ArticleCard = ({
             <Typography className={classes.info} variant={typographys.info}>
               {loading && verticalMode ? (
                 <>
-                  <Skeleton width={150} animation="wave"></Skeleton>
-                  <Skeleton width={150} animation="wave"></Skeleton>
+                  <Skeleton width={150}></Skeleton>
+                  <Skeleton width={150}></Skeleton>
                 </>
               ) : loading && !verticalMode ? (
-                <Skeleton width={180} animation="wave"></Skeleton>
+                <Skeleton width={180}></Skeleton>
               ) : verticalMode ? (
                 <span>
                   {writerName} <br /> {timeConverted(article.updatedAt)}
