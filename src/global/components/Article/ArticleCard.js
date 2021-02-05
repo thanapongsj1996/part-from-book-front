@@ -14,6 +14,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Skeleton } from '@material-ui/lab'
 
 import UserAvatar from 'global/components/User/UserAvatar'
+import SkeletonMultipleLine from 'global/components/Skeleton/SkeletonMultipleLine'
 
 import { timeConverted } from 'utils/thaiTimeConvert'
 
@@ -122,7 +123,7 @@ const ArticleCard = ({
           width={verticalMode ? '100%' : 500}
           height={verticalMode ? 200 : 'auto'}
           variant="rect"
-        ></Skeleton>
+        />
       ) : (
         <CardMedia
           className={verticalMode ? classes.cover : classes.coverLandscape}
@@ -132,7 +133,7 @@ const ArticleCard = ({
 
       <CardContent className="w-100">
         {loading ? (
-          <Skeleton width="60%" className={classes.title}></Skeleton>
+          <Skeleton width="60%" className={classes.title} />
         ) : (
           <Typography
             className={classes.title}
@@ -144,11 +145,9 @@ const ArticleCard = ({
         )}
 
         {loading ? (
-          <>
-            <Skeleton width="90%"></Skeleton>
-            <Skeleton width="90%"></Skeleton>
-            <Skeleton width="90%" className={classes.description}></Skeleton>
-          </>
+          <div className={classes.description}>
+            <SkeletonMultipleLine numberLine={3} />
+          </div>
         ) : (
           <Typography
             className={classes.description}
@@ -177,12 +176,9 @@ const ArticleCard = ({
           <Grid item>
             <Typography className={classes.info} variant={typographys.info}>
               {loading && verticalMode ? (
-                <>
-                  <Skeleton width={150}></Skeleton>
-                  <Skeleton width={150}></Skeleton>
-                </>
+                <SkeletonMultipleLine numberLine={2} width={150} />
               ) : loading && !verticalMode ? (
-                <Skeleton width={180}></Skeleton>
+                <Skeleton width={180} />
               ) : verticalMode ? (
                 <span>
                   {writerName} <br /> {timeConverted(article.updatedAt)}
