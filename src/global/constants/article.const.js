@@ -8,4 +8,8 @@ export const ARTICLE = {
     EDIT: 'edit',
     CREATE: 'create',
   },
+  PIC_FILE: {
+    MAX_SIZE: 1 * 1024 * 1024,
+    FORMATS: ['image/jpg', 'image/jpeg', 'image/png'],
+  },
 }
