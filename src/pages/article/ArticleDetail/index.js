@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Container, Grid, Button, useMediaQuery } from '@material-ui/core'
@@ -7,13 +7,19 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import WriterCard from './components/WriterCard'
 import ArticleDatailCard from './components/ArticleDetailCard'
 import OtherArticles from './components/OtherArticles'
+import ArticleEditCard from 'global/components/Article/ArticleEditCard'
 
 import { fetchArticleById } from 'actions/article.action'
+
+import { ARTICLE } from 'global/constants/article.const'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.mixins.toolbar.minHeight + theme.spacing(5),
     paddingBottom: theme.spacing(5),
+  },
+  content: {
+    marginBottom: theme.spacing(10),
   },
   editBtn: {
     width: 80,
@@ -37,32 +43,54 @@ const ArticleDetail = ({ actions, ...props }) => {
     try {
       const res = await actions.fetchArticleById(id)
       console.log(res.data)
-      setArticle(res.data)
+      setArticle({ ...res.data, state: ARTICLE.STATE.READ })
     } catch (e) {
       console.error(e.message)
     }
   }
 
+  const editState = useMemo(() => article?.state === ARTICLE.STATE.EDIT, [
+    article.state,
+  ])
+
+  const showEditBtn = useMemo(() => {
+    return !editState && article._id
+  }, [editState, article._id])
+
+  const handleClickEdit = () =>
+    setArticle({ ...article, state: ARTICLE.STATE.EDIT })
+
   return (
     <Container className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container className={classes.content} spacing={3}>
         {mdUp && (
           <Grid item xs="auto">
             <WriterCard writer={article.writer} />
           </Grid>
         )}
         <Grid item xs={12} md={8}>
-          <ArticleDatailCard article={article} mdUp={mdUp} />
+          {editState ? (
+            <ArticleEditCard article={article} setArticle={setArticle} />
+          ) : (
+            <ArticleDatailCard
+              article={article}
+              mdUp={mdUp}
+              editState={editState}
+            />
+          )}
         </Grid>
-        <Grid item>
-          <Button
-            className={classes.editBtn}
-            variant="contained"
-            color="primary"
-          >
-            แก้ไข
-          </Button>
-        </Grid>
+        {showEditBtn && (
+          <Grid item>
+            <Button
+              className={classes.editBtn}
+              variant="contained"
+              color="primary"
+              onClick={handleClickEdit}
+            >
+              แก้ไข
+            </Button>
+          </Grid>
+        )}
       </Grid>
 
       <OtherArticles id={id} />
