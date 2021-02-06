@@ -1,23 +1,108 @@
-import React from 'react'
-import { Container, Toolbar } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useEffect, useState, useMemo } from 'react'
+import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { Container, Grid, Button, useMediaQuery } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 
-import ArticleDatail from './components/ArticleDetail'
+import WriterCard from './components/WriterCard'
+import ArticleDatailCard from './components/ArticleDetailCard'
+import OtherArticles from './components/OtherArticles'
+import ArticleEditCard from 'global/components/Article/ArticleEditCard'
+
+import { fetchArticleById } from 'actions/article.action'
+
+import { ARTICLE } from 'global/constants/article.const'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: theme.mixins.toolbar.minHeight + theme.spacing(5),
+    paddingBottom: theme.spacing(5),
+  },
   content: {
-    padding: theme.spacing(2, 0),
+    marginBottom: theme.spacing(10),
+  },
+  editBtn: {
+    width: 80,
   },
 }))
 
-export default function Content() {
+const ArticleDetail = ({ actions, ...props }) => {
+  const { id } = useParams()
   const classes = useStyles()
+  const theme = useTheme()
+  const mdUp = useMediaQuery(theme.breakpoints.up('md'))
+  const [article, setArticle] = useState({})
+
+  useEffect(() => {
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
+  const fetchData = async () => {
+    setArticle({})
+    try {
+      const res = await actions.fetchArticleById(id)
+      console.log(res.data)
+      setArticle({ ...res.data, state: ARTICLE.STATE.READ })
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
+
+  const editState = useMemo(() => article?.state === ARTICLE.STATE.EDIT, [
+    article.state,
+  ])
+
+  const showEditBtn = useMemo(() => {
+    return !editState && article._id
+  }, [editState, article._id])
+
+  const handleClickEdit = () =>
+    setArticle({ ...article, state: ARTICLE.STATE.EDIT })
+
   return (
-    <main className={classes.content}>
-      <Container maxWidth="lg">
-        <Toolbar />
-        <ArticleDatail />
-      </Container>
-    </main>
+    <Container className={classes.root}>
+      <Grid container className={classes.content} spacing={3}>
+        {mdUp && (
+          <Grid item xs="auto">
+            <WriterCard writer={article.writer} />
+          </Grid>
+        )}
+        <Grid item xs={12} md={8}>
+          {editState ? (
+            <ArticleEditCard article={article} setArticle={setArticle} />
+          ) : (
+            <ArticleDatailCard
+              article={article}
+              mdUp={mdUp}
+              editState={editState}
+            />
+          )}
+        </Grid>
+        {showEditBtn && (
+          <Grid item>
+            <Button
+              className={classes.editBtn}
+              variant="contained"
+              color="primary"
+              onClick={handleClickEdit}
+            >
+              แก้ไข
+            </Button>
+          </Grid>
+        )}
+      </Grid>
+
+      <OtherArticles id={id} />
+    </Container>
   )
 }
+
+const mapStates = () => ({})
+
+const mapActions = { fetchArticleById }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
+
+export default connect(mapStates, mapActions, mergeProps)(ArticleDetail)

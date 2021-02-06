@@ -7,17 +7,18 @@ import SeparatorText from 'global/components/SeparatorText'
 
 import { fetchArticles } from 'actions/article.action'
 
-const HomeRecentlyArticle = ({ actions, ...props }) => {
-  const [articles, setArticles] = useState([{}, {}, {}, {}])
+const OtherArticles = ({ actions, ...props }) => {
+  const [articles, setArticles] = useState([{}, {}, {}])
 
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [props.id])
 
   const fetchData = async () => {
+    setArticles([{}, {}, {}])
     try {
-      const { data } = await actions.fetchArticles(1, 4)
+      const { data } = await actions.fetchArticles(1, 3)
       const { articles } = data
       setArticles(articles)
     } catch (e) {
@@ -26,14 +27,10 @@ const HomeRecentlyArticle = ({ actions, ...props }) => {
   }
 
   return (
-    <Container id="recently-article">
-      <SeparatorText text="บทความล่าสุด" />
+    <Container>
+      <SeparatorText text="บทความอื่น ๆ" />
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <ArticleCard article={articles[0]} orientation="horizontal" />
-        </Grid>
-
-        {articles.slice(1).map((article, index) => (
+        {articles.map((article, index) => (
           <Grid key={article._id || index} item xs={12} sm={6} md={4}>
             <ArticleCard article={article} />
           </Grid>
@@ -50,4 +47,4 @@ const mapActions = { fetchArticles }
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
 
-export default connect(mapStates, mapActions, mergeProps)(HomeRecentlyArticle)
+export default connect(mapStates, mapActions, mergeProps)(OtherArticles)

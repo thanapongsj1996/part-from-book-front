@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.97,
   },
   appBarDefault: {
-    backgroundColor: COLOR.grey1,
+    backgroundColor: COLOR.GREY1,
   },
   appBarDark: {
-    backgroundColor: COLOR.dark1,
+    backgroundColor: COLOR.DARK1,
   },
   hide: {
     opacity: 0,

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
     borderRadius: 3,
     '& > .MuiInputBase-root': {
-      border: `1px solid ${COLOR.grey3}`,
+      border: `1px solid ${COLOR.GREY3}`,
     },
     [theme.breakpoints.down('xs')]: {
       width: '90%',

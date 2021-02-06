@@ -38,13 +38,7 @@ const AricleList = ({ actions, ...props }) => {
   }
 
   const getEmptyObject = useCallback(() => {
-    const result = []
-
-    for (let i = 0; i < perPage.current; i++) {
-      result.push({ loading: true })
-    }
-
-    return result
+    return new Array(perPage.current).fill({})
   }, [perPage])
 
   return (

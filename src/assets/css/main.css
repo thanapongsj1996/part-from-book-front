@@ -1,29 +1,12 @@
-@font-face {
-  font-family: 'NotoSans';
-  src: url('../fonts/NotoSans/NotoSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
+@import 'cursor.css';
+@import 'display.css';
+@import 'element.css';
+@import 'error.css';
+@import 'font.css';
+@import 'size.css';
 
-@font-face {
-  font-family: 'NotoSans';
-  src: url('../fonts/NotoSans/NotoSans-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NotoSans';
-  src: url('../fonts/NotoSans/NotoSans-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NotoSans';
-  src: url('../fonts/NotoSans/NotoSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -31,32 +14,5 @@ body {
   margin: 0;
   font-family: 'NotoSans', 'Poppins', 'Prompt', sans-serif;
   scroll-behavior: smooth;
-  font-size: 16px;
   height: 100%;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.prevent-click {
-  pointer-events: none;
-}
-
-.w-100 {
-  width: 100% !important;
-}
-
-@media screen and (max-width: 959px) {
-  html,
-  body {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  html,
-  body {
-    font-size: 20px;
-  }
 }

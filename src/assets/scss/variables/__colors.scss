@@ -10,6 +10,8 @@ $black-color: #000000;
 $grey-1-color: #f9f9f9;
 $grey-2-color: #535353;
 $grey-3-color: #c4c4c4;
+$grey-4-color: #eaeaea;
+$grey-5-color: #adadad;
 
 $dark-1-color: #181818;
 $dark-2-color: #212121;
@@ -19,20 +21,22 @@ $dark-3-color: #383838;
 
 // Export for JS Script
 :export {
-  primary: $primary-color;
-  primaryLigher: $primary-lighter-color;
-  primaryDarker: $primary-darker-color;
+  PRIMARY: $primary-color;
+  PRIMARY_LIGHTER: $primary-lighter-color;
+  PRIMARY_DARKER: $primary-darker-color;
 
-  white: $while-color;
-  black: $black-color;
+  WHITE: $while-color;
+  BLACKE: $black-color;
 
-  grey1: $grey-1-color;
-  grey2: $grey-2-color;
-  grey3: $grey-3-color;
+  GREY1: $grey-1-color;
+  GREY2: $grey-2-color;
+  GREY3: $grey-3-color;
+  GREY4: $grey-4-color;
+  GREY5: $grey-5-color;
 
-  dark1: $dark-1-color;
-  dark2: $dark-2-color;
-  dark3: $dark-3-color;
+  DARK1: $dark-1-color;
+  DARK2: $dark-2-color;
+  DARK3: $dark-3-color;
 }
 
 :root {

@@ -1,0 +1,22 @@
+textarea {
+  display: block;
+  min-width: 50%;
+  max-width: 100%;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem;
+  overflow: auto !important;
+  border-radius: 4px;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+textarea::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+textarea.error,
+textarea.error:focus {
+  border-color: #f44336 !important;
+}

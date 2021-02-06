@@ -16,27 +16,27 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 1),
   },
   nav: {
-    color: COLOR.black,
+    color: COLOR.BLACK,
+    '&.active': {
+      color: COLOR.PRIMARY,
+      fontWeight: 600,
+    },
   },
   navDark: {
-    color: COLOR.grey3,
-  },
-  navActive: {
-    color: COLOR.primary,
-    fontWeight: 600,
-  },
-  navDarkActive: {
-    color: COLOR.white,
-    fontWeight: 600,
+    color: COLOR.GREY3,
+    '&.active': {
+      color: COLOR.WHITE,
+      fontWeight: 600,
+    },
   },
   authLabel: {
     textTransform: 'none',
   },
   icon: {
-    color: COLOR.primary,
+    color: COLOR.PRIMARY,
   },
   iconDark: {
-    color: COLOR.white,
+    color: COLOR.WHITE,
   },
 }))
 
@@ -46,27 +46,30 @@ const HeaderNavbar = ({ darkMode, location }) => {
   const getNavClass = useCallback(
     (url) => {
       const classList = [classes.navButton]
+      let isActive
+
+      if (url === '/') {
+        isActive = location.pathname === url
+      } else {
+        isActive = location.pathname.includes(url)
+      }
 
       if (darkMode) {
         classList.push(classes.navDark)
-        if (location.pathname === url) {
-          classList.push(classes.navDarkActive)
-        }
       } else {
         classList.push(classes.nav)
-        if (location.pathname === url) {
-          classList.push(classes.navActive)
-        }
+      }
+
+      if (isActive) {
+        classList.push('active')
       }
 
       return classList.join(' ')
     },
     [
       classes.nav,
-      classes.navActive,
       classes.navButton,
       classes.navDark,
-      classes.navDarkActive,
       darkMode,
       location.pathname,
     ]

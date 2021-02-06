@@ -12,7 +12,7 @@ import {
 import MuiLink from 'global/components/MuiLink'
 
 import { TIMELINES } from '../constants/timelines.const'
-import { primary } from 'assets/scss/variables/__colors.scss'
+import COLOR from 'assets/scss/variables/__colors.scss'
 
 const useStyles = makeStyles({
   rootTimelineItem: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
   },
   active: {
-    color: primary,
+    color: COLOR.PRIMARY,
     fontWeight: 600,
   },
 })

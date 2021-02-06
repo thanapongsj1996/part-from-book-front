@@ -14,8 +14,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Skeleton } from '@material-ui/lab'
 
 import UserAvatar from 'global/components/User/UserAvatar'
+import SkeletonMultipleLine from 'global/components/Skeleton/SkeletonMultipleLine'
 
-import utils from 'utils'
+import { thaiTimeConvert } from 'utils/conversion.util'
 
 import { ARTICLE } from 'global/constants/article.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
@@ -48,10 +49,12 @@ const ArticleCard = ({
       title: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
         fontWeight: verticalMode ? 500 : 600,
-        color: darkMode ? COLOR.white : COLOR.black,
+        color: darkMode ? COLOR.WHITE : COLOR.BLACK,
       },
       description: {
         marginBottom: verticalMode ? theme.spacing(1) : theme.spacing(3),
+        fontFamily: 'Sarabun, sans-serif !important',
+        fontWeight: 300,
       },
       cover: {
         height: 200,
@@ -66,7 +69,7 @@ const ArticleCard = ({
         marginTop: theme.spacing(2),
       },
       info: {
-        color: darkMode ? COLOR.grey3 : COLOR.grey2,
+        color: darkMode ? COLOR.GREY3 : COLOR.GREY2,
       },
     })),
     [orientation, darkMode, isMobile]
@@ -120,23 +123,17 @@ const ArticleCard = ({
           width={verticalMode ? '100%' : 500}
           height={verticalMode ? 200 : 'auto'}
           variant="rect"
-          animation="wave"
-        ></Skeleton>
+        />
       ) : (
         <CardMedia
           className={verticalMode ? classes.cover : classes.coverLandscape}
           image={article.photo}
-          title={article.title}
         />
       )}
 
       <CardContent className="w-100">
         {loading ? (
-          <Skeleton
-            width="60%"
-            className={classes.title}
-            animation="wave"
-          ></Skeleton>
+          <Skeleton width="60%" className={classes.title} />
         ) : (
           <Typography
             className={classes.title}
@@ -148,15 +145,9 @@ const ArticleCard = ({
         )}
 
         {loading ? (
-          <>
-            <Skeleton width="90%" animation="wave"></Skeleton>
-            <Skeleton width="90%" animation="wave"></Skeleton>
-            <Skeleton
-              width="90%"
-              className={classes.description}
-              animation="wave"
-            ></Skeleton>
-          </>
+          <div className={classes.description}>
+            <SkeletonMultipleLine numberLine={3} />
+          </div>
         ) : (
           <Typography
             className={classes.description}
@@ -174,12 +165,7 @@ const ArticleCard = ({
         >
           <Grid item>
             {loading ? (
-              <Skeleton
-                animation="wave"
-                variant="circle"
-                width={40}
-                height={40}
-              />
+              <Skeleton variant="circle" width={40} height={40} />
             ) : (
               <UserAvatar
                 photo={article?.writer?.photo}
@@ -190,20 +176,17 @@ const ArticleCard = ({
           <Grid item>
             <Typography className={classes.info} variant={typographys.info}>
               {loading && verticalMode ? (
-                <>
-                  <Skeleton width={150} animation="wave"></Skeleton>
-                  <Skeleton width={150} animation="wave"></Skeleton>
-                </>
+                <SkeletonMultipleLine numberLine={2} width={150} />
               ) : loading && !verticalMode ? (
-                <Skeleton width={180} animation="wave"></Skeleton>
+                <Skeleton width={180} />
               ) : verticalMode ? (
                 <span>
-                  {writerName} <br /> {utils.timeConverted(article.updatedAt)}
+                  {writerName} <br /> {thaiTimeConvert(article.updatedAt)}
                 </span>
               ) : (
                 <span>
                   {writerName} &nbsp; &#8226; &nbsp;
-                  {utils.timeConverted(article.updatedAt)}
+                  {thaiTimeConvert(article.updatedAt)}
                 </span>
               )}
             </Typography>

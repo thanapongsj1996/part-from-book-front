@@ -28,7 +28,7 @@ const App = ({ darkMode, actions, ...props }) => {
 
   // Update body background color
   useEffect(() => {
-    const backgroundColor = darkMode ? COLOR.dark1 : COLOR.grey1
+    const backgroundColor = darkMode ? COLOR.DARK1 : COLOR.GREY1
     document.body.style.backgroundColor = backgroundColor
     localStorage.setItem(LOCAL_STORAGE.DARK_MODE_KEY, darkMode)
   }, [darkMode])

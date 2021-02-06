@@ -21,7 +21,7 @@ const HeaderLogo = ({ darkMode, hideLabel, size = 1.25 }) => {
       },
       label: {
         fontWeight: 600,
-        color: darkMode ? COLOR.white : COLOR.primary,
+        color: darkMode ? COLOR.WHITE : COLOR.PRIMARY,
         fontSize: `${size}rem`,
       },
     })),
