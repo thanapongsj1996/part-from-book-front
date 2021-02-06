@@ -11,10 +11,8 @@ import background from 'assets/images/login/login-background.png'
 import darkBackground from 'assets/images/login/login-dark-background.png'
 
 const validationSchema = yup.object({
-  email: yup.string('กรุณาระบุอีเมลของคุณ').required('กรุณาระบุอีเมลของคุณ'),
-  password: yup
-    .string('กรุณาระบุรหัสผ่านของคุณ')
-    .required('กรุณาระบุรหัสผ่านของคุณ'),
+  email: yup.string().required('กรุณาระบุอีเมลของคุณ'),
+  password: yup.string().required('กรุณาระบุรหัสผ่านของคุณ'),
 })
 
 const useStyles = makeStyles((theme) => ({
