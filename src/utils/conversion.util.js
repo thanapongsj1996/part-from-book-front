@@ -1,4 +1,5 @@
-export const timeConverted = (time, monthFormat = 'long') => {
+// Date conversion
+export const thaiTimeConvert = (time, monthFormat = 'long') => {
   time = new Date(time)
   return time.toLocaleDateString('th-TH', {
     year: 'numeric',

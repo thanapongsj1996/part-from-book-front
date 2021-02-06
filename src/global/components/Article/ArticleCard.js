@@ -16,7 +16,7 @@ import { Skeleton } from '@material-ui/lab'
 import UserAvatar from 'global/components/User/UserAvatar'
 import SkeletonMultipleLine from 'global/components/Skeleton/SkeletonMultipleLine'
 
-import { timeConverted } from 'utils/thaiTimeConvert'
+import { thaiTimeConvert } from 'utils/conversion.util'
 
 import { ARTICLE } from 'global/constants/article.const'
 import COLOR from 'assets/scss/variables/__colors.scss'
@@ -181,12 +181,12 @@ const ArticleCard = ({
                 <Skeleton width={180} />
               ) : verticalMode ? (
                 <span>
-                  {writerName} <br /> {timeConverted(article.updatedAt)}
+                  {writerName} <br /> {thaiTimeConvert(article.updatedAt)}
                 </span>
               ) : (
                 <span>
                   {writerName} &nbsp; &#8226; &nbsp;
-                  {timeConverted(article.updatedAt)}
+                  {thaiTimeConvert(article.updatedAt)}
                 </span>
               )}
             </Typography>

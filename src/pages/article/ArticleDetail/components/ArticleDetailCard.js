@@ -11,7 +11,7 @@ import { Skeleton } from '@material-ui/lab'
 
 import SkeletonMultipleLine from 'global/components/Skeleton/SkeletonMultipleLine'
 
-import { timeConverted } from 'utils/thaiTimeConvert'
+import { thaiTimeConvert } from 'utils/conversion.util'
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
@@ -52,7 +52,7 @@ const ArticleDetailCard = ({ article, ...props }) => {
             component: 'h1',
             className: classes.title,
           }}
-          subheader={timeConverted(article.updatedAt, 'short')}
+          subheader={thaiTimeConvert(article.updatedAt, 'short')}
           subheaderTypographyProps={{ variant: 'subtitle2' }}
         />
       )}
