@@ -7,12 +7,15 @@ import UserAvatar from 'global/components/User/UserAvatar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '0 1rem',
-    width: 150,
+    width: '9.375rem',
   },
   avatarLoading: {
     width: '5rem',
     height: '5rem',
+  },
+  content: {
+    padding: '16px 0 24px',
+    margin: '0 1rem',
   },
   penName: {
     fontWeight: 600,
@@ -27,8 +30,8 @@ const WriterCard = ({ writer }) => {
 
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <Grid container direction="column" justify="center" spacing={1}>
+      <CardContent className={classes.content}>
+        <Grid container direction="column" alignItems="center" spacing={1}>
           <Grid item>
             {loading ? (
               <Skeleton variant="circle" className={classes.avatarLoading} />
@@ -40,7 +43,7 @@ const WriterCard = ({ writer }) => {
               />
             )}
           </Grid>
-          <Grid item>
+          <Grid item container justify="center">
             {loading ? (
               <Skeleton width="100%" />
             ) : (
