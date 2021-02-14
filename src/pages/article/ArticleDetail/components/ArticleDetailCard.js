@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontFamily: 'Sarabun, sans-serif !important',
     fontWeight: 300,
+    fontSize: '1.125rem',
+    lineHeight: 1.75,
   },
 }))
 
