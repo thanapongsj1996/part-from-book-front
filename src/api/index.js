@@ -11,6 +11,7 @@ API.BASE_URL = `${API_ENDPOINT}/${API_PREFIX}`
 API.ARTICLES_PREFIX = () => `${API.BASE_URL}/articles`
 
 // API - Articles
-API.getAllArticles = () => `${API.ARTICLES_PREFIX()}`
+API.articles = () => `${API.ARTICLES_PREFIX()}`
+API.articleById = (id) => `${API.ARTICLES_PREFIX()}/${id}`
 
 export default API
