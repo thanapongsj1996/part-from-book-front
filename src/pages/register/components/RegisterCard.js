@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submitBtn: {
     width: 150,
-    margin: '16px 0',
+    margin: '24px 0',
     fontSize: '1rem',
   },
   link: {
@@ -190,6 +190,12 @@ const RegisterCard = ({ darkMode, formik }) => {
                   เข้าสู่ระบบ
                 </MuiLink>
               </Typography>
+            </Grid>
+
+            <Grid item>
+              <MuiLink to="/" color="inherit" className={classes.link}>
+                กลับหน้าแรก
+              </MuiLink>
             </Grid>
           </Grid>
         </Grid>
