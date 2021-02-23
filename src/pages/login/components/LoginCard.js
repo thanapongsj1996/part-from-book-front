@@ -69,9 +69,16 @@ const useStyles = makeStyles((theme) => ({
       background: 'rgba(56, 56, 56, 0.7)',
     },
   },
+  forgetWrapper: {
+    width: '80%',
+    color: COLOR.GREY2,
+    '&.dark': {
+      color: COLOR.GREY3,
+    },
+  },
   submitBtn: {
     width: 150,
-    margin: '16px 0',
+    margin: '24px 0',
     fontSize: '1rem',
   },
   link: {
@@ -115,6 +122,16 @@ const LoginCard = ({ darkMode, formik }) => {
     darkMode,
   ])
 
+  const forgetWrapperClasses = useMemo(() => {
+    const classList = [classes.forgetWrapper]
+
+    if (darkMode) {
+      classList.push('dark')
+    }
+
+    return classList.join(' ')
+  }, [classes.forgetWrapper, darkMode])
+
   return (
     <Card className={cardClasses}>
       <CardContent className={classes.cardContent}>
@@ -157,6 +174,19 @@ const LoginCard = ({ darkMode, formik }) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
+
+            <Grid container justify="flex-end" className={forgetWrapperClasses}>
+              <Grid item>
+                <MuiLink
+                  to="/forget-password"
+                  color="inherit"
+                  className={classes.link}
+                >
+                  ลืมรหัสผ่าน
+                </MuiLink>
+              </Grid>
+            </Grid>
+
             <Button
               className={classes.submitBtn}
               variant="contained"
@@ -176,17 +206,6 @@ const LoginCard = ({ darkMode, formik }) => {
             spacing={3}
           >
             <Grid item>
-              <MuiLink
-                to="/forget-password"
-                color="inherit"
-                underline="always"
-                className={classes.link}
-              >
-                ลืมรหัสผ่าน
-              </MuiLink>
-            </Grid>
-
-            <Grid item>
               <Typography variant="body2" gutterBottom>
                 ยังไม่มีบัญชีผู้ใช้งาน
                 <MuiLink
@@ -198,6 +217,12 @@ const LoginCard = ({ darkMode, formik }) => {
                   สมัครสมาชิก
                 </MuiLink>
               </Typography>
+            </Grid>
+
+            <Grid item>
+              <MuiLink to="/" color="inherit" className={classes.link}>
+                กลับหน้าแรก
+              </MuiLink>
             </Grid>
           </Grid>
         </Grid>
