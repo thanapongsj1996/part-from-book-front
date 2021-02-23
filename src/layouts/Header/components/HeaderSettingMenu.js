@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
-import {
-  Button,
-  Paper,
-  MenuItem,
-  MenuList,
-  Popper,
-  ClickAwayListener,
-} from '@material-ui/core'
+import { Button, MenuItem, MenuList } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Brightness7Rounded as SunIcon,
@@ -15,6 +8,7 @@ import {
 } from '@material-ui/icons'
 
 import MuiLink from 'global/components/MuiLink'
+import PopperMenu from 'global/components/PopperMenu'
 
 import { toggleDarkMode } from 'actions/app.action'
 
@@ -31,10 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonDarkFont: {
     color: COLOR.GREY3,
-  },
-  popper: {
-    zIndex: theme.zIndex.drawer + 1,
-    boxShadow: theme.shadows[1],
   },
   menuList: {
     minWidth: 220,
@@ -60,6 +50,13 @@ const HeaderPopmenu = ({ darkMode, showHeader, actions, ...props }) => {
   }, [showHeader])
 
   const toggleOpenSubMenu = (event) => {
+    event.stopPropagation()
+    const isClick = event?.type === 'click'
+
+    if (!isClick) {
+      return
+    }
+
     if (menuPostion) {
       setMenuPostion(null)
     } else {
@@ -84,50 +81,23 @@ const HeaderPopmenu = ({ darkMode, showHeader, actions, ...props }) => {
         ตั้งค่า
       </Button>
 
-      <Popper
-        className={classes.popper}
-        open={!!menuPostion}
-        anchorEl={menuPostion}
-        placement="bottom-end"
-        onClose={toggleOpenSubMenu}
-      >
-        <Paper>
-          <ClickAwayListener onClickAway={toggleOpenSubMenu}>
-            <MenuList className={classes.menuList}>
-              {/* {SUB_MENU_LIST.map((menu) => (
-                <MenuItem
-                  key={menu.title}
-                  className={classes.menu}
-                  onClick={toggleOpenSubMenu}
-                >
-                  {menu.title}
-                </MenuItem>
-              ))} */}
+      <PopperMenu position={menuPostion} toggleOpenMenu={toggleOpenSubMenu}>
+        <MenuList className={classes.menuList}>
+          <MenuItem className={classes.menu} onClick={actions.toggleDarkMode}>
+            <span>เปลี่ยนโหมด</span>
+            {darkMode ? <SunIcon /> : <MoonIcon className={classes.moonIcon} />}
+          </MenuItem>
 
-              <MenuItem
-                className={classes.menu}
-                onClick={actions.toggleDarkMode}
-              >
-                <span>เปลี่ยนโหมด</span>
-                {darkMode ? (
-                  <SunIcon />
-                ) : (
-                  <MoonIcon className={classes.moonIcon} />
-                )}
-              </MenuItem>
-
-              <MuiLink
-                to="/login"
-                color="inherit"
-                underline="none"
-                onClick={toggleOpenSubMenu}
-              >
-                <MenuItem className={classes.menu}>เข้าสู่ระบบ</MenuItem>
-              </MuiLink>
-            </MenuList>
-          </ClickAwayListener>
-        </Paper>
-      </Popper>
+          <MuiLink
+            to="/login"
+            color="inherit"
+            underline="none"
+            onClick={toggleOpenSubMenu}
+          >
+            <MenuItem className={classes.menu}>เข้าสู่ระบบ</MenuItem>
+          </MuiLink>
+        </MenuList>
+      </PopperMenu>
     </>
   )
 }
