@@ -14,6 +14,8 @@ import useStyles from './ArticleEditCard.css'
 import { filetoBase64 } from 'utils/conversion.util'
 import { updateArticleById } from 'actions/article.action'
 
+import ConfirmDialog from 'global/components/Dialog/ConfirmDialog'
+
 import { ARTICLE } from 'global/constants/article.const'
 
 const validationSchema = yup.object({
@@ -34,6 +36,7 @@ const ArticleEditCard = ({
   const classes = useStyles()
   const fileInputRef = useRef(null)
   const [displayPic, setDisplayPic] = useState(noPicUrl)
+  const [openDialog, setOpenDialog] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -163,6 +166,13 @@ const ArticleEditCard = ({
     return classList.join(' ')
   }, [classes.textArea, darkMode])
 
+  const confirmCancel = (confirm) => {
+    if (confirm) {
+      back()
+    }
+    setOpenDialog(false)
+  }
+
   return (
     <>
       <img className={classes.media} src={displayPic} alt="upload" />
@@ -246,13 +256,21 @@ const ArticleEditCard = ({
             <Button
               className={classes.actionBtn}
               variant="contained"
-              onClick={back}
+              onClick={() => setOpenDialog(true)}
             >
               ยกเลิก
             </Button>
           </Grid>
         </Grid>
       </form>
+
+      <ConfirmDialog
+        open={openDialog}
+        onCloseDialog={confirmCancel}
+        content="คุณต้องการยกเลิกการแก้ไขบทความนี้หรือไม่ ?"
+        confirmText="ยกเลิก"
+        cancelText="แก้ไขต่อ"
+      />
     </>
   )
 }

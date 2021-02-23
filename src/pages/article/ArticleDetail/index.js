@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Container, Grid, Button, useMediaQuery } from '@material-ui/core'
+import { Container, Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import WriterCard from './components/WriterCard'
@@ -42,7 +42,6 @@ const ArticleDetail = ({ actions, ...props }) => {
     setArticle({})
     try {
       const res = await actions.fetchArticleById(id)
-      console.log(res.data)
       setArticle({ ...res.data, state: ARTICLE.STATE.READ })
     } catch (e) {
       console.error(e.message)
@@ -52,13 +51,6 @@ const ArticleDetail = ({ actions, ...props }) => {
   const editState = useMemo(() => article?.state === ARTICLE.STATE.EDIT, [
     article.state,
   ])
-
-  const showEditBtn = useMemo(() => {
-    return !editState && article._id
-  }, [editState, article._id])
-
-  const handleClickEdit = () =>
-    setArticle({ ...article, state: ARTICLE.STATE.EDIT })
 
   return (
     <Container className={classes.root}>
@@ -74,23 +66,12 @@ const ArticleDetail = ({ actions, ...props }) => {
           ) : (
             <ArticleDatailCard
               article={article}
+              setArticle={setArticle}
               mdUp={mdUp}
               editState={editState}
             />
           )}
         </Grid>
-        {showEditBtn && (
-          <Grid item>
-            <Button
-              className={classes.editBtn}
-              variant="contained"
-              color="primary"
-              onClick={handleClickEdit}
-            >
-              แก้ไข
-            </Button>
-          </Grid>
-        )}
       </Grid>
 
       <OtherArticles id={id} />
