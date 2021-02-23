@@ -17,3 +17,10 @@ export const fetchArticleById = (id) => {
 
   return async (dispatch) => await responseHandle(dispatch, request)
 }
+
+export const updateArticleById = (id, body) => {
+  const url = API.articleById(id)
+  const request = httpClient.put(url, body).then((res) => res.data)
+
+  return async (dispatch) => await responseHandle(dispatch, request)
+}

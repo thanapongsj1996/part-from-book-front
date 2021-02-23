@@ -12,18 +12,25 @@ import * as yup from 'yup'
 
 import useStyles from './ArticleEditCard.css'
 import { filetoBase64 } from 'utils/conversion.util'
+import { updateArticleById } from 'actions/article.action'
 
 import { ARTICLE } from 'global/constants/article.const'
 
 const validationSchema = yup.object({
   title: yup.string().required('กรุณาระบุเรื่อง'),
-  description: yup.string().required('กรุณาระบุข้อความ'),
+  body: yup.string().required('กรุณาระบุข้อความ'),
 })
 
 const noPicUrl =
   'https://storage.googleapis.com/part-from-book-storage/user-images/nopic.png'
 
-const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
+const ArticleEditCard = ({
+  darkMode,
+  article,
+  setArticle,
+  actions,
+  ...props
+}) => {
   const classes = useStyles()
   const fileInputRef = useRef(null)
   const [displayPic, setDisplayPic] = useState(noPicUrl)
@@ -31,7 +38,7 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
   const formik = useFormik({
     initialValues: {
       title: article.title,
-      description: article.body,
+      body: article.body,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => submit(values),
@@ -45,8 +52,7 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
   const updateDisplayPic = async () => {
     const { photo, uploadedFile } = article
     if (uploadedFile) {
-      const base64 = await filetoBase64(uploadedFile)
-      setDisplayPic(base64)
+      setDisplayPic(uploadedFile)
     } else {
       setDisplayPic(photo || noPicUrl)
     }
@@ -68,14 +74,15 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
         return
       }
 
-      setArticle({ ...article, uploadedFile: file })
+      const uploadedFile = await filetoBase64(file)
+      setArticle({ ...article, uploadedFile })
       fileInputRef.current.value = null
     } else {
       fileInputRef.current.click()
     }
   }
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { uploadedFile, error } = article
 
     if (error) {
@@ -83,13 +90,36 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
     }
 
     if (article.state === ARTICLE.STATE.EDIT) {
-      alert(uploadedFile ? 'อัพโหลดรูปใหม่' : 'ใช้รูปเดิม')
-      back()
+      editArticle(values)
     } else {
       if (!uploadedFile) {
         alert('กรุณาอัพโหลดไฟล์รูปภาพ')
         return
       }
+    }
+  }
+
+  const editArticle = async (values) => {
+    const keyList = ['title', 'body']
+    let edited = keyList.some((key) => article[key] !== values[key])
+    const body = {
+      title: values.title,
+      body: values.body,
+    }
+
+    if (article.uploadedFile) {
+      body.uploadedFile = article.uploadedFile
+      edited = true
+    }
+
+    try {
+      if (edited) {
+        const res = await actions.updateArticleById(article._id, body)
+        console.log(res)
+      }
+      back()
+    } catch (e) {
+      alert(e)
     }
   }
 
@@ -100,7 +130,7 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
 
   const back = () => {
     if (article._id) {
-      setArticle({ ...article, state: ARTICLE.STATE.READ })
+      setArticle({ ...article, state: ARTICLE.STATE.READ, uploadedFile: null })
     }
   }
 
@@ -186,17 +216,17 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
           />
         </div>
         <div className={classes.formGroup}>
-          <label className={labelClasses('description')}>ข้อความ</label>
+          <label className={labelClasses('body')}>ข้อความ</label>
           <TextareaAutosize
             className={textAreaClasses}
-            name="description"
+            name="body"
             rowsMin={5}
-            value={formik.values.description}
+            value={formik.values.body}
             onChange={formik.handleChange}
           />
-          {isError('description') && (
+          {isError('body') && (
             <p className="error-text">
-              {formik.touched.description && formik.errors.description}
+              {formik.touched.body && formik.errors.body}
             </p>
           )}
         </div>
@@ -229,7 +259,7 @@ const ArticleEditCard = ({ darkMode, article, setArticle, ...props }) => {
 
 const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
 
-const mapActions = {}
+const mapActions = { updateArticleById }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })
