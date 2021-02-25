@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-// import { Menu } from '@material-ui/icons'
 
 import HeaderSettingMenu from './HeaderSettingMenu'
 import { NAV_LIST } from '../constants/header-menu.const'
@@ -14,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.125rem',
     fontWeight: 400,
     margin: theme.spacing(0, 1),
+    '&.full-height': {
+      height: theme.mixins.toolbar.minHeight,
+      borderRadius: 0,
+      '&.active': {
+        borderBottom: '3px solid',
+      },
+    },
   },
   nav: {
     color: COLOR.BLACK,
@@ -40,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const HeaderNavbar = ({ darkMode, location }) => {
+const HeaderNavbar = ({ darkMode, transparent, location }) => {
   const classes = useStyles()
 
   const getNavClass = useCallback(
@@ -54,10 +60,13 @@ const HeaderNavbar = ({ darkMode, location }) => {
         isActive = location.pathname.includes(url)
       }
 
-      if (darkMode) {
+      if (darkMode && !transparent) {
         classList.push(classes.navDark)
       } else {
         classList.push(classes.nav)
+        if (transparent) {
+          classList.push('full-height')
+        }
       }
 
       if (isActive) {
@@ -72,6 +81,7 @@ const HeaderNavbar = ({ darkMode, location }) => {
       classes.navDark,
       darkMode,
       location.pathname,
+      transparent,
     ]
   )
 
@@ -82,7 +92,6 @@ const HeaderNavbar = ({ darkMode, location }) => {
 
   return (
     <>
-      {/* <Hidden only={['xs']}> */}
       {availableNavs.map((menu) => (
         <Button
           key={menu.title}
@@ -94,29 +103,7 @@ const HeaderNavbar = ({ darkMode, location }) => {
         </Button>
       ))}
 
-      <HeaderSettingMenu />
-
-      {/* <Button
-              classes={{ root: classes.authLabel }}
-              className={classes.navButton}
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-            >
-              เข้าสู่ระบบ
-            </Button> */}
-      {/* </Hidden> */}
-
-      {/* <IconButton onClick={onShowPopMenu}>
-        <Menu
-          className={darkMode ? classes.iconDark : classes.icon}
-          fontSize="large"
-        />
-      </IconButton>
-
-      <HeaderPopMenu
-        profilePopover={profilePopover}
-        setProfilePopover={setProfilePopover}
-      /> */}
+      <HeaderSettingMenu transparent={transparent} />
     </>
   )
 }

@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.125rem',
     fontWeight: 400,
     margin: theme.spacing(0, 1),
+    '&.full-height': {
+      minHeight: theme.mixins.toolbar.minHeight,
+    },
   },
   buttonFont: {
     color: COLOR.BLACK,
@@ -66,14 +69,24 @@ const HeaderPopmenu = ({ darkMode, showHeader, actions, ...props }) => {
 
   const buttonClasses = useMemo(() => {
     const classList = [classes.button]
-    if (darkMode) {
+    if (darkMode && !props.transparent) {
       classList.push(classes.buttonDarkFont)
     } else {
       classList.push(classes.buttonFont)
     }
 
+    if (props.transparent) {
+      classList.push('full-height')
+    }
+
     return classList.join(' ')
-  }, [classes.button, classes.buttonDarkFont, classes.buttonFont, darkMode])
+  }, [
+    classes.button,
+    classes.buttonDarkFont,
+    classes.buttonFont,
+    darkMode,
+    props.transparent,
+  ])
 
   return (
     <>
