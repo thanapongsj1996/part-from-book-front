@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useCallback } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { AppBar, Toolbar, Container } from '@material-ui/core'
+import { AppBar, Toolbar, Container, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Logo from 'global/components/Logo'
@@ -18,21 +18,37 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer,
     transition: 'opacity .5s',
     opacity: 0.97,
-  },
-  appBarDefault: {
     backgroundColor: COLOR.GREY1,
-  },
-  appBarDark: {
-    backgroundColor: COLOR.DARK1,
+    '&.dark': {
+      backgroundColor: COLOR.DARK1,
+    },
+    '&.transparent': {
+      backgroundColor: 'transparent',
+      boxShadow: theme.shadows[0],
+    },
   },
   hide: {
     opacity: 0,
     pointerEvents: 'none',
   },
+  toolbar: {
+    position: 'relative',
+  },
+  divider: {
+    position: 'absolute',
+    bottom: 4.5,
+    left: 0,
+    width: '100%',
+    height: 2,
+    zIndex: -1,
+    backgroundColor: COLOR.GREY5,
+  },
   spacer: {
     flexGrow: 1,
   },
 }))
+
+// static transparent
 const Header = ({ appState, actions, location, ...props }) => {
   const classes = useStyles()
 
@@ -47,10 +63,14 @@ const Header = ({ appState, actions, location, ...props }) => {
   }, [actions, appState.showHeader])
 
   useEffect(() => {
-    document.addEventListener('scroll', handleScroll)
+    if (!props.static) {
+      document.addEventListener('scroll', handleScroll)
+    }
 
     return () => {
-      document.removeEventListener('scroll', handleScroll)
+      if (!props.static) {
+        document.removeEventListener('scroll', handleScroll)
+      }
     }
   })
 
@@ -59,36 +79,46 @@ const Header = ({ appState, actions, location, ...props }) => {
     const isHomePage = location.pathname === '/'
     const hideHeader = hideList.includes(location.pathname)
 
-    if (appState.darkMode) {
-      classList.push(classes.appBarDark)
-    } else {
-      classList.push(classes.appBarDefault)
+    if (props.transparent) {
+      classList.push('transparent')
+    } else if (appState.darkMode) {
+      classList.push('dark')
     }
 
-    if (hideHeader || (!appState.showHeader && isHomePage)) {
-      classList.push(classes.hide)
+    if (!props.static) {
+      if (hideHeader || (!appState.showHeader && isHomePage)) {
+        classList.push(classes.hide)
+      }
     }
 
     return classList.join(' ')
   }, [
     classes.appBar,
-    classes.appBarDark,
-    classes.appBarDefault,
     classes.hide,
     location.pathname,
-    appState.darkMode,
+    props.transparent,
+    props.static,
     appState.showHeader,
+    appState.darkMode,
   ])
 
   return (
-    <AppBar className={appBarClasses} position="fixed">
+    <AppBar
+      className={appBarClasses}
+      position={props.static ? 'absolute' : 'fixed'}
+    >
       <Container>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Logo darkMode={appState.darkMode} hideLabel />
 
           <div className={classes.spacer} />
 
-          <HeaderNavbar darkMode={appState.darkMode} />
+          <HeaderNavbar
+            darkMode={appState.darkMode}
+            transparent={props.transparent}
+          />
+
+          {props.transparent && <Divider className={classes.divider} />}
         </Toolbar>
       </Container>
     </AppBar>

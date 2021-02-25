@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container } from '@material-ui/core'
+// import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import JumbotronTimeline from './JumbotronTimeline'
+import Header from 'layouts/Header'
+// import JumbotronTimeline from './JumbotronTimeline'
 
 import background from 'assets/images/home/jumbotron-background.png'
 
@@ -10,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
     width: '100%',
+    minHeight: 550,
     background: `url(${background})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -37,10 +39,11 @@ export default function Jumbotron() {
 
   return (
     <section className={classes.root}>
-      <Container className={classes.timeline}>
+      <Header static transparent />
+      {/* <Container className={classes.timeline}>
         <JumbotronTimeline />
-      </Container>
-      <div className={classes.overlay}></div>
+      </Container> */}
+      {/* <div className={classes.overlay}></div> */}
     </section>
   )
 }
