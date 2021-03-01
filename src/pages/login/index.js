@@ -7,6 +7,10 @@ import * as yup from 'yup'
 
 import LoginCard from './components/LoginCard'
 
+import { login } from 'actions/user.action'
+import { cookies } from 'index'
+
+import { COOKIE_STORAGE } from 'global/constants/storage.const'
 import background from 'assets/images/login/login-background.png'
 import darkBackground from 'assets/images/login/login-dark-background.png'
 
@@ -36,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Login = ({ darkMode, ...props }) => {
+const Login = ({ darkMode, actions, ...props }) => {
   const classes = useStyles()
   const formik = useFormik({
     initialValues: { email: '', password: '' },
@@ -44,8 +48,16 @@ const Login = ({ darkMode, ...props }) => {
     onSubmit: (values) => submit(values),
   })
 
-  const submit = (values) => {
-    alert('Submit email:', values.email)
+  const submit = async (values) => {
+    try {
+      const { data } = await actions.login(values)
+      const token = `${data.token_type} ${data.access_token}`
+      const cookieOptions = { maxAge: COOKIE_STORAGE.COOKIE_MAX_AGE }
+
+      cookies.set(COOKIE_STORAGE.TOKEN_KEY, token, cookieOptions)
+    } catch (e) {
+      alert(e)
+    }
   }
 
   const rootClasses = useMemo(() => {
@@ -70,7 +82,7 @@ const Login = ({ darkMode, ...props }) => {
 
 const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
 
-const mapActions = {}
+const mapActions = { login }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })

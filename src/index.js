@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import Cookies from 'universal-cookie'
 
 import App from './App'
 import store from './store/configureStore'
@@ -8,6 +9,8 @@ import store from './store/configureStore'
 import * as serviceWorker from './serviceWorker'
 
 import './assets/css/main.css'
+
+export const cookies = new Cookies()
 
 ReactDOM.render(
   <React.StrictMode>

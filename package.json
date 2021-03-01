@@ -24,6 +24,7 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^10.1.0",
     "scss": "^0.2.4",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.8"
   },
   "scripts": {
