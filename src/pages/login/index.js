@@ -7,7 +7,7 @@ import * as yup from 'yup'
 
 import LoginCard from './components/LoginCard'
 
-import { login } from 'actions/user.action'
+import { updateUserData, login } from 'actions/user.action'
 import { cookies } from 'index'
 
 import { COOKIE_STORAGE } from 'global/constants/storage.const'
@@ -55,6 +55,7 @@ const Login = ({ darkMode, actions, ...props }) => {
       const cookieOptions = { maxAge: COOKIE_STORAGE.COOKIE_MAX_AGE }
 
       cookies.set(COOKIE_STORAGE.TOKEN_KEY, token, cookieOptions)
+      actions.updateUserData()
     } catch (e) {
       alert(e)
     }
@@ -82,7 +83,7 @@ const Login = ({ darkMode, actions, ...props }) => {
 
 const mapStates = ({ appState }) => ({ darkMode: appState.darkMode })
 
-const mapActions = { login }
+const mapActions = { updateUserData, login }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) =>
   Object.assign({}, ownProps, stateProps, { actions: { ...dispatchProps } })

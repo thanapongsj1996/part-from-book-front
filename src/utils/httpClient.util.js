@@ -8,9 +8,9 @@ const httpClient = axios.create({
 })
 
 httpClient.interceptors.request.use(async (config) => {
-  config.headers = {
-    Authorization: cookies.get(COOKIE_STORAGE.TOKEN_KEY),
-  }
+  // config.headers = {
+  //   Authorization: cookies.get(COOKIE_STORAGE.TOKEN_KEY),
+  // }
 
   return config
 })
